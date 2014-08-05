@@ -553,8 +553,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -588,8 +586,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.17605634033679962</real>
-							<real>0.41249999403953552</real>
+							<real>0.50562530755996704</real>
+							<real>0.50462359189987183</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -617,6 +615,8 @@
 						<string>Crosshair.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -700,13 +700,13 @@
 			<key>ext</key>
 			<string>phone</string>
 			<key>height</key>
-			<integer>568</integer>
+			<integer>320</integer>
 			<key>name</key>
-			<string>Phone Portrait</string>
+			<string>Phone Landscape</string>
 			<key>scale</key>
 			<real>1</real>
 			<key>width</key>
-			<integer>320</integer>
+			<integer>568</integer>
 		</dict>
 		<dict>
 			<key>centeredOrigin</key>
@@ -714,13 +714,13 @@
 			<key>ext</key>
 			<string>tablet phonehd</string>
 			<key>height</key>
-			<integer>512</integer>
+			<integer>384</integer>
 			<key>name</key>
-			<string>Tablet Portrait</string>
+			<string>Tablet Landscape</string>
 			<key>scale</key>
 			<real>2</real>
 			<key>width</key>
-			<integer>384</integer>
+			<integer>512</integer>
 		</dict>
 		<dict>
 			<key>centeredOrigin</key>
@@ -728,13 +728,13 @@
 			<key>ext</key>
 			<string>phone</string>
 			<key>height</key>
-			<integer>480</integer>
+			<integer>320</integer>
 			<key>name</key>
-			<string>iPhone Portrait (short)</string>
+			<string>Phone Landscape (short)</string>
 			<key>scale</key>
 			<real>1</real>
 			<key>width</key>
-			<integer>320</integer>
+			<integer>480</integer>
 		</dict>
 	</array>
 	<key>sequences</key>

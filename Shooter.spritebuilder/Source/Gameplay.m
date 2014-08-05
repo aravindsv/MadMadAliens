@@ -14,7 +14,7 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-static const int SENSITIVITY = 10;
+static const int SENSITIVITY = 5;
 static const int MAX_ENEMIES = 20;
 
 @implementation Gameplay
@@ -30,6 +30,11 @@ static const int MAX_ENEMIES = 20;
     float timer;
     int enemiesKilled;
     int health;
+    
+    int probability;
+    float enemySpeed;
+    
+    bool gameRunning;
 }
 
 #pragma mark - Initialization Methods
@@ -38,6 +43,9 @@ static const int MAX_ENEMIES = 20;
 {
     self.userInteractionEnabled = true;
     health = 100;
+    probability = 60;
+    enemySpeed = 100.f;
+    gameRunning = true;
 }
 
 -(id)init
@@ -74,7 +82,7 @@ static const int MAX_ENEMIES = 20;
     {
         if (CGRectContainsPoint(enemy.boundingBox, newBullet.positionInPoints))
         {
-            [enemy removeFromParentAndCleanup:YES];
+            [enemy removeFromParent];
             enemiesKilled++;
         }
     }
@@ -94,28 +102,37 @@ static const int MAX_ENEMIES = 20;
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);
     
-    if ((timer >= 2) && (arc4random() % 60 == 1) && ([_enemyNode.children count] < MAX_ENEMIES))
+    if (gameRunning)
     {
-        Enemy *newEnemy = (Enemy *)[CCBReader load:@"Enemy"];
-        newEnemy.positionInPoints = [self randomPositionOffScreen];
-        [_enemyNode addChild:newEnemy];
-        //timer = 0;
-    }
-    
-    for (Enemy *enemy in _enemyNode.children)
-    {
-        CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:50.f position:_base.positionInPoints];
-        [enemy runAction:actionMoveTo];
-        
-        if (CGRectContainsPoint(_base.boundingBox, enemy.positionInPoints))
+        if ((timer >= 2) && (arc4random() % probability == 1) && ([_enemyNode.children count] < MAX_ENEMIES))
         {
-            health--;
+            Enemy *newEnemy = (Enemy *)[CCBReader load:@"Enemy"];
+            newEnemy.positionInPoints = [self randomPositionOffScreen];
+            [_enemyNode addChild:newEnemy];
+            //timer = 0;
         }
-    }
+        else if ([_enemyNode.children count] >= MAX_ENEMIES)
+        {
+            [_enemyNode removeAllChildren];
+            probability *= .75;
+        }
     
-    if (health <= 0)
-    {
-        [self gameOver];
+        for (Enemy *enemy in _enemyNode.children)
+        {
+            CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:enemySpeed position:_base.positionInPoints];
+            [enemy runAction:actionMoveTo];
+//            enemySpeed *= .9;
+        
+            if (CGRectContainsPoint(_base.boundingBox, enemy.positionInPoints))
+            {
+                health--;
+            }
+        }
+    
+        if (health <= 0)
+        {
+            [self gameOver];
+        }
     }
 }
 
@@ -173,6 +190,7 @@ static const int MAX_ENEMIES = 20;
 
 -(void)gameOver
 {
+    gameRunning = false;
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"highscore"];
     if (enemiesKilled > [highScore intValue])
     {
@@ -183,7 +201,7 @@ static const int MAX_ENEMIES = 20;
     GameOver *gameOver = (GameOver *)[CCBReader load:@"GameOver"];
     [gameOver setScore:enemiesKilled andHighscore:[highScore intValue]];
     gameOver.positionType = CCPositionTypeNormalized;
-    gameOver.position = ccp(.25, .1);
+    gameOver.position = ccp(.25, 0.035);
 //    [[CCDirector sharedDirector] pushScene:(CCScene *)gameOver];
     [self addChild:gameOver];
 }

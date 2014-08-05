@@ -12,7 +12,7 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-static const int SENSITIVITY = 10;
+static const int SENSITIVITY = 5;
 
 @implementation MainScene
 {

@@ -849,8 +849,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -943,8 +941,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.37186899781227112</real>
-							<real>0.2809598445892334</real>
+							<real>0.5089377760887146</real>
+							<real>0.49150538444519043</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -987,6 +985,8 @@
 						<string>Crosshair.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
