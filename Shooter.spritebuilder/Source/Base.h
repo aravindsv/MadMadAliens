@@ -10,7 +10,7 @@
 
 @interface Base : CCNode
 
-@property int health;
+@property double health;
 
 @property int score;
 

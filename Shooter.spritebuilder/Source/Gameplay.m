@@ -152,7 +152,7 @@ static const int MAX_ENEMIES = 20;
         
             if (CGRectContainsPoint(_base.boundingBox, enemy.positionInPoints))
             {
-                _base.health--;
+                _base.health -= .5;
             }
         }
     

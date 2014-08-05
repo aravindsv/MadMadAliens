@@ -24,7 +24,7 @@
 -(void)update:(CCTime)delta
 {
     _scoreLabel.string = [NSString stringWithFormat:@"%d",_score];
-    _healthLabel.string = [NSString stringWithFormat:@"Health: %d", _health];
+    _healthLabel.string = [NSString stringWithFormat:@"Health: %.0f", _health];
     if (_health == 250 && _fire == nil)
     {
         CCLOG(@"Added fire particle");
