@@ -15,7 +15,7 @@
 #import <CoreMotion/CoreMotion.h>
 
 static const int SENSITIVITY = 10;
-static const int MAX_ENEMIES = 10;
+static const int MAX_ENEMIES = 20;
 
 @implementation Gameplay
 {
@@ -88,8 +88,8 @@ static const int MAX_ENEMIES = 10;
     _healthLabel.string = [NSString stringWithFormat:@"Health: %d", health];
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = _crosshair.position.x + acceleration.x * SENSITIVITY * delta;
-    CGFloat newYPosition = _crosshair.position.y + acceleration.y * SENSITIVITY * delta;
+    CGFloat newXPosition = _crosshair.position.x - acceleration.y * SENSITIVITY * delta;
+    CGFloat newYPosition = _crosshair.position.y + acceleration.x * SENSITIVITY * delta;
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);
@@ -183,7 +183,7 @@ static const int MAX_ENEMIES = 10;
     GameOver *gameOver = (GameOver *)[CCBReader load:@"GameOver"];
     [gameOver setScore:enemiesKilled andHighscore:[highScore intValue]];
     gameOver.positionType = CCPositionTypeNormalized;
-    gameOver.position = ccp(.1, .25);
+    gameOver.position = ccp(.25, .1);
 //    [[CCDirector sharedDirector] pushScene:(CCScene *)gameOver];
     [self addChild:gameOver];
 }

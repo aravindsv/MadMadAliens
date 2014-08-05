@@ -73,8 +73,8 @@ static const int SENSITIVITY = 10;
 {
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = _crosshair.position.x + acceleration.x * SENSITIVITY * delta;
-    CGFloat newYPosition = _crosshair.position.y + acceleration.y * SENSITIVITY * delta;
+    CGFloat newXPosition = _crosshair.position.x - acceleration.y * SENSITIVITY * delta;
+    CGFloat newYPosition = _crosshair.position.y + acceleration.x * SENSITIVITY * delta;
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);

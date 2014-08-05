@@ -19,8 +19,8 @@
 
 -(void)replay
 {
-    //    CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
-    //    [[CCDirector sharedDirector] replaceScene:gameplay];
+    CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gameplay];
 }
 
 -(void)setScore:(int)curScore andHighscore:(int)curHighscore
