@@ -1,14 +1,21 @@
 //
-//  Crosshair.m
+//  Enemy.m
 //  Shooter
 //
 //  Created by Aravind Vadali on 8/4/14.
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "Crosshair.h"
-#import "Bullet.h"
+#import "Enemy.h"
 
-@implementation Crosshair
+@implementation Enemy
+{
+    
+}
+
+-(void)didLoadFromCCB
+{
+    self.zOrder = 9000;
+}
 
 @end

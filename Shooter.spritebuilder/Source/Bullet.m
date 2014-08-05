@@ -16,7 +16,7 @@
 -(void)didLoadFromCCB
 {
     self.physicsBody.collisionType = @"Bullet";
-    self.zOrder = 9001;
+    self.zOrder = 9002;
 }
 
 -(void)update:(CCTime)delta

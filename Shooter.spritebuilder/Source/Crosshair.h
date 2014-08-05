@@ -12,6 +12,5 @@
 
 @interface Crosshair : CCNode
 
--(void)shootBullet:(Bullet *)bullet;
 
 @end
