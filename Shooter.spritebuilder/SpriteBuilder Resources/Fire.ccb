@@ -15,6 +15,8 @@
 	<false/>
 	<key>currentResolution</key>
 	<integer>0</integer>
+	<key>currentSequenceId</key>
+	<integer>0</integer>
 	<key>docDimensionsType</key>
 	<integer>1</integer>
 	<key>fileType</key>
@@ -134,7 +136,7 @@
 				<key>type</key>
 				<string>Integer</string>
 				<key>value</key>
-				<integer>250</integer>
+				<integer>200</integer>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -154,7 +156,7 @@
 				<string>FloatVar</string>
 				<key>value</key>
 				<array>
-					<real>54</real>
+					<real>40</real>
 					<real>10</real>
 				</array>
 			</dict>
@@ -219,7 +221,7 @@
 						<real>0.0</real>
 						<real>0.0</real>
 						<real>0.0</real>
-						<real>0.0</real>
+						<real>1</real>
 					</array>
 				</array>
 			</dict>
@@ -240,7 +242,7 @@
 						<real>0.0</real>
 						<real>0.0</real>
 						<real>0.0</real>
-						<real>0.0</real>
+						<real>1</real>
 					</array>
 				</array>
 			</dict>
@@ -316,6 +318,8 @@
 				<string>ccbResources/ccbParticleFire.png</string>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
@@ -348,6 +352,45 @@
 			<real>2</real>
 			<key>width</key>
 			<integer>0</integer>
+		</dict>
+	</array>
+	<key>sequences</key>
+	<array>
+		<dict>
+			<key>autoPlay</key>
+			<true/>
+			<key>callbackChannel</key>
+			<dict>
+				<key>keyframes</key>
+				<array/>
+				<key>type</key>
+				<integer>12</integer>
+			</dict>
+			<key>chainedSequenceId</key>
+			<integer>-1</integer>
+			<key>length</key>
+			<real>10</real>
+			<key>name</key>
+			<string>Default Timeline</string>
+			<key>offset</key>
+			<real>0.0</real>
+			<key>position</key>
+			<real>0.0</real>
+			<key>resolution</key>
+			<real>30</real>
+			<key>scale</key>
+			<real>128</real>
+			<key>sequenceId</key>
+			<integer>0</integer>
+			<key>soundChannel</key>
+			<dict>
+				<key>isExpanded</key>
+				<false/>
+				<key>keyframes</key>
+				<array/>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
 		</dict>
 	</array>
 	<key>stageBorder</key>

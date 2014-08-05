@@ -11,6 +11,7 @@
 #import "Bullet.h"
 #import "Enemy.h"
 #import "GameOver.h"
+#import "Base.h"
 
 #import <CoreMotion/CoreMotion.h>
 
@@ -23,14 +24,12 @@ static const int MAX_ENEMIES = 20;
     
     CCNode *_enemyNode;
     Crosshair *_crosshair;
-    CCNode *_base;
+    Base *_base;
     CCNode *_replayButton;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_healthLabel;
     
     float timer;
-    int enemiesKilled;
-    int health;
     
     int probability;
     float enemySpeed;
@@ -44,7 +43,7 @@ static const int MAX_ENEMIES = 20;
 -(void)didLoadFromCCB
 {
     self.userInteractionEnabled = true;
-    health = 100;
+    _base.health = 100;
     probability = 60;
     enemySpeed = 50.f;
     gameRunning = true;
@@ -85,7 +84,10 @@ static const int MAX_ENEMIES = 20;
         if (CGRectContainsPoint(enemy.boundingBox, newBullet.positionInPoints))
         {
             [enemy removeFromParent];
-            enemiesKilled++;
+            if (gameRunning)
+            {
+                _base.score++;
+            }
         }
     }
     if (!gameRunning)
@@ -105,8 +107,8 @@ static const int MAX_ENEMIES = 20;
 -(void)update:(CCTime)delta
 {
     timer += delta;
-    _scoreLabel.string = [NSString stringWithFormat:@"%d", enemiesKilled];
-    _healthLabel.string = [NSString stringWithFormat:@"Health: %d", health];
+    //_scoreLabel.string = [NSString stringWithFormat:@"%d", enemiesKilled];
+    //_healthLabel.string = [NSString stringWithFormat:@"Health: %d", _base.health];
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
     CGFloat newXPosition = _crosshair.position.x - acceleration.y * SENSITIVITY * delta;
@@ -140,11 +142,11 @@ static const int MAX_ENEMIES = 20;
         
             if (CGRectContainsPoint(_base.boundingBox, enemy.positionInPoints))
             {
-                health--;
+                _base.health--;
             }
         }
     
-        if (health <= 0)
+        if (_base.health <= 0)
         {
             [self gameOver];
         }
@@ -208,15 +210,15 @@ static const int MAX_ENEMIES = 20;
 {
     gameRunning = false;
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"highscore"];
-    if (enemiesKilled > [highScore intValue])
+    if (_base.score > [highScore intValue])
     {
-        highScore = [NSNumber numberWithInt:enemiesKilled];
+        highScore = [NSNumber numberWithInt:_base.score];
         [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"highscore"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     gameOver = (GameOver *)[CCBReader load:@"GameOver" owner:self];
     gameOver.zOrder = 9;
-    [gameOver setScore:enemiesKilled andHighscore:[highScore intValue]];
+    [gameOver setScore:_base.score andHighscore:[highScore intValue]];
     gameOver.positionType = CCPositionTypeNormalized;
     gameOver.position = ccp(.25, 0.035);
 //    [[CCDirector sharedDirector] pushScene:(CCScene *)gameOver];
