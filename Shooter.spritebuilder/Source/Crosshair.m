@@ -11,9 +11,10 @@
 
 @implementation Crosshair
 
--(void)shootBullet:(Bullet *)bullet
+-(void)didLoadFromCCB
 {
-    
+    self.zOrder = 12;
 }
+
 
 @end

@@ -17,6 +17,10 @@
     int highScore;
 }
 
+-(void)didLoadFromCCB
+{
+}
+
 -(void)replay
 {
     CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];

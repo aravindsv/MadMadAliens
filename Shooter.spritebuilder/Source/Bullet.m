@@ -16,7 +16,7 @@
 -(void)didLoadFromCCB
 {
     self.physicsBody.collisionType = @"Bullet";
-    self.zOrder = 9001;
+    self.zOrder = 11;
 }
 
 -(void)update:(CCTime)delta
@@ -24,7 +24,7 @@
     timer += delta;
     if (timer >= .75)
     {
-        [self removeFromParentAndCleanup:YES];
+        [self removeFromParent];
     }
 }
 

@@ -12,4 +12,8 @@
 
 -(void)setScore:(int)curScore andHighscore:(int)curHighscore;
 
+@property (strong) CCNode *replayButton;
+
+-(void)replay;
+
 @end
