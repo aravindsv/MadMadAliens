@@ -10,9 +10,11 @@
 
 @implementation Enemy
 
+
 -(void)didLoadFromCCB
 {
     self.zOrder = 10;
 }
+
 
 @end

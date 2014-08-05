@@ -43,7 +43,7 @@ static const int MAX_ENEMIES = 20;
 -(void)didLoadFromCCB
 {
     self.userInteractionEnabled = true;
-    _base.health = 100;
+    _base.health = 500;
     probability = 60;
     enemySpeed = 50.f;
     gameRunning = true;
@@ -83,6 +83,11 @@ static const int MAX_ENEMIES = 20;
     {
         if (CGRectContainsPoint(enemy.boundingBox, newBullet.positionInPoints))
         {
+//            CCLOG(@"Added explosion");
+            CCParticleSystem *_explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
+            _explosion.positionInPoints = enemy.positionInPoints;
+            _explosion.autoRemoveOnFinish = true;
+            [self addChild:_explosion];
             [enemy removeFromParent];
             if (gameRunning)
             {
@@ -119,7 +124,7 @@ static const int MAX_ENEMIES = 20;
     
     if (gameRunning)
     {
-        if ((timer >= 2) && (arc4random() % probability == 1) && ([_enemyNode.children count] < MAX_ENEMIES))
+        if ((timer >= 2) && (arc4random() % probability == 0) && ([_enemyNode.children count] < MAX_ENEMIES))
         {
             [self spawnEnemy];
 //            Enemy *newEnemy = (Enemy *)[CCBReader load:@"Enemy"];
@@ -131,8 +136,13 @@ static const int MAX_ENEMIES = 20;
         }
         else if ([_enemyNode.children count] >= MAX_ENEMIES)
         {
+            CCLOG(@"Array full! Emptying array and increasing enemy frequency");
             [_enemyNode removeAllChildren];
-            probability *= .75;
+            probability *= .5;
+        }
+        if (_base.score != 0 && _base.score % 10 == 0)
+        {
+//            probability *= .5;
         }
     
         for (Enemy *enemy in _enemyNode.children)
