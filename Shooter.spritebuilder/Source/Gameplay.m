@@ -44,7 +44,7 @@ static const int MAX_ENEMIES = 20;
 -(void)didLoadFromCCB
 {
     self.userInteractionEnabled = true;
-    health = 1000;
+    health = 100;
     probability = 60;
     enemySpeed = 50.f;
     gameRunning = true;
@@ -119,11 +119,12 @@ static const int MAX_ENEMIES = 20;
     {
         if ((timer >= 2) && (arc4random() % probability == 1) && ([_enemyNode.children count] < MAX_ENEMIES))
         {
-            Enemy *newEnemy = (Enemy *)[CCBReader load:@"Enemy"];
-            newEnemy.positionInPoints = [self randomPositionOffScreen];
-            CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:100/enemySpeed position:_base.positionInPoints];
-            [newEnemy runAction:actionMoveTo];
-            [_enemyNode addChild:newEnemy];
+            [self spawnEnemy];
+//            Enemy *newEnemy = (Enemy *)[CCBReader load:@"Enemy"];
+//            newEnemy.positionInPoints = [self randomPositionOffScreen];
+//            CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:100/enemySpeed position:_base.positionInPoints];
+//            [newEnemy runAction:actionMoveTo];
+//            [_enemyNode addChild:newEnemy];
             //timer = 0;
         }
         else if ([_enemyNode.children count] >= MAX_ENEMIES)
@@ -220,6 +221,55 @@ static const int MAX_ENEMIES = 20;
     gameOver.position = ccp(.25, 0.035);
 //    [[CCDirector sharedDirector] pushScene:(CCScene *)gameOver];
     [self addChild:gameOver];
+}
+
+-(void)spawnEnemy
+{
+    Enemy *newEnemy = (Enemy *)[CCBReader load:@"Enemy"];
+    int spawnArea = arc4random() % 4;
+    int width = self.contentSizeInPoints.width;
+    int height = self.contentSizeInPoints.height;
+    float xpos = 0.0;
+    float ypos = 0.0;
+    int val = arc4random() % 50;
+    switch (spawnArea) {
+        case 0:
+        {
+            //Enemies come in from top
+            xpos = arc4random() % width;
+            ypos = val + height;
+            newEnemy.positionInPoints = ccp(xpos, ypos);
+            break;
+        }
+        case 1:
+        {
+            //Enemies come in from bottom
+            xpos = arc4random() % width;
+            ypos = 0 - val;
+            break;
+        }
+        case 2:
+        {
+            //Enemies come in from left
+            xpos = 0 - val;
+            ypos = arc4random() % height;
+            break;
+        }
+        case 3:
+        {
+            //Enemies come in from right
+            xpos = val + width;
+            ypos = arc4random() % height;
+            break;
+        }
+        default:
+            break;
+    }
+    newEnemy.positionInPoints = ccp(xpos, ypos);
+    CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:100/enemySpeed position:_base.positionInPoints];
+    [newEnemy runAction:actionMoveTo];
+    [_enemyNode addChild:newEnemy];
+
 }
 
 

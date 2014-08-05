@@ -18,10 +18,12 @@
 {
     _scoreLabel.string = [NSString stringWithFormat:@"%d",_score];
     _healthLabel.string = [NSString stringWithFormat:@"Health: %d", _health];
-    if (_health < 75)
+    if (_health % 20 == 0)
     {
+        CCLOG(@"Added fire particle");
         CCParticleSystem *_fire = (CCParticleSystem *)[CCBReader load:@"Fire"];
-//        fire.position = 
+        _fire.position = ccp(arc4random() % (int)self.contentSizeInPoints.width, arc4random() % (int)self.contentSizeInPoints.height);
+        [self addChild:_fire];
     }
 }
 
