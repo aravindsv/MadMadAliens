@@ -22,7 +22,7 @@ static const int SENSITIVITY = 10;
     Crosshair *_crosshair;
 }
 
-#pragma mark - Initilization Methods
+#pragma mark - Initialization Methods
 
 -(void)didLoadFromCCB
 {
@@ -50,7 +50,7 @@ static const int SENSITIVITY = 10;
     [_motionManager stopAccelerometerUpdates];
 }
 
-#pragma mark - Touch Methods
+#pragma mark - Touch Handling Methods
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
@@ -62,6 +62,8 @@ static const int SENSITIVITY = 10;
     if (CGRectContainsPoint(_startNode.boundingBox, newBullet.positionInPoints))
     {
         CCLOG(@"Going to GameplayScene");
+        CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
+        [[CCDirector sharedDirector] replaceScene:gameplay];
     }
 }
 
@@ -76,8 +78,6 @@ static const int SENSITIVITY = 10;
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);
-    
-    
 }
 
 @end
