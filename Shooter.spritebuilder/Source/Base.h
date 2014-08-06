@@ -12,6 +12,8 @@
 
 @property double health;
 
+@property CCNodeColor* healthBar;
+
 @property int score;
 
 @end

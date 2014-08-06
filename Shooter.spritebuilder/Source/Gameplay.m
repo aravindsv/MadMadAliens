@@ -17,6 +17,7 @@
 
 static const int SENSITIVITY = 5;
 static const int MAX_ENEMIES = 20;
+static const int ENEMY_DAMAGE = 1;
 
 @implementation Gameplay
 {
@@ -152,7 +153,13 @@ static const int MAX_ENEMIES = 20;
         
             if (CGRectContainsPoint(_base.boundingBox, enemy.positionInPoints))
             {
-                _base.health -= .5;
+//                CCParticleSystem *_explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
+//                _explosion.positionInPoints = enemy.positionInPoints;
+//                _explosion.duration = .05;
+//                _explosion.autoRemoveOnFinish = true;
+//                [self addChild:_explosion];
+                _base.health -= ENEMY_DAMAGE;
+                _base.healthBar.scaleX -= .002;
             }
         }
     

@@ -11,7 +11,6 @@
 @implementation Base
 {
     CCLabelTTF *_scoreLabel;
-    CCLabelTTF *_healthLabel;
     CCParticleSystem *_fire;
     CCParticleSystem *_fire2;
 }
@@ -24,8 +23,7 @@
 -(void)update:(CCTime)delta
 {
     _scoreLabel.string = [NSString stringWithFormat:@"%d",_score];
-    _healthLabel.string = [NSString stringWithFormat:@"Health: %.0f", _health];
-    if (_health == 250 && _fire == nil)
+    if (_health == 250)
     {
         CCLOG(@"Added fire particle");
         [_fire removeFromParent];
@@ -35,7 +33,7 @@
         _fire.position = ccp(.5, .5);
         [self addChild:_fire];
     }
-    if (_health == 100 && _fire2 == nil)
+    if (_health == 100)
     {
         CCLOG(@"Added fire particle");
         //[_fire removeFromParent];

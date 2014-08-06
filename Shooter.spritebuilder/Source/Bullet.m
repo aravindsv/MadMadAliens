@@ -22,7 +22,7 @@
 -(void)update:(CCTime)delta
 {
     timer += delta;
-    if (timer >= .75)
+    if (timer >= .25)
     {
         [self removeFromParent];
     }
