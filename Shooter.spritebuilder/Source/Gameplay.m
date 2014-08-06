@@ -14,6 +14,7 @@
 #import "Base.h"
 
 #import <CoreMotion/CoreMotion.h>
+#import <AudioToolbox/AudioServices.h>
 
 static const int SENSITIVITY = 5;
 static const int MAX_ENEMIES = 20;
@@ -79,16 +80,18 @@ static const int ENEMY_DAMAGE = 1;
     newBullet.positionType = CCPositionTypeNormalized;
     newBullet.position = _crosshair.position;
     [self addChild:newBullet];
+
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
+    CCParticleSystem *_explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
+    _explosion.positionInPoints = newBullet.positionInPoints;
+    _explosion.autoRemoveOnFinish = true;
+    [self addChild:_explosion];
     
     for (Enemy *enemy in [_enemyNode.children copy])
     {
         if (CGRectContainsPoint(enemy.boundingBox, newBullet.positionInPoints))
         {
-//            CCLOG(@"Added explosion");
-            CCParticleSystem *_explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
-            _explosion.positionInPoints = enemy.positionInPoints;
-            _explosion.autoRemoveOnFinish = true;
-            [self addChild:_explosion];
             [enemy removeFromParent];
             if (gameRunning)
             {
@@ -153,13 +156,9 @@ static const int ENEMY_DAMAGE = 1;
         
             if (CGRectContainsPoint(_base.boundingBox, enemy.positionInPoints))
             {
-//                CCParticleSystem *_explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
-//                _explosion.positionInPoints = enemy.positionInPoints;
-//                _explosion.duration = .05;
-//                _explosion.autoRemoveOnFinish = true;
-//                [self addChild:_explosion];
                 _base.health -= ENEMY_DAMAGE;
                 _base.healthBar.scaleX -= .002;
+                [enemy stopAllActions];
             }
         }
     
