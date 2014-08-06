@@ -12,6 +12,7 @@
 #import "Enemy.h"
 #import "GameOver.h"
 #import "Base.h"
+#import "CCMotionStreak.h"
 
 #import <CoreMotion/CoreMotion.h>
 #import <AudioToolbox/AudioServices.h>
@@ -19,6 +20,7 @@
 static const int SENSITIVITY = 5;
 static const int MAX_ENEMIES = 20;
 static const int ENEMY_DAMAGE = 1;
+static const int COMET_CHANCE = 1500;
 
 @implementation Gameplay
 {
@@ -31,6 +33,7 @@ static const int ENEMY_DAMAGE = 1;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_healthLabel;
     
+    CCNode *_cometNode;
     float timer;
     
     int probability;
@@ -99,6 +102,15 @@ static const int ENEMY_DAMAGE = 1;
             }
         }
     }
+    for (CCNode *comet in [_cometNode.children copy])
+    {
+        if (CGRectContainsPoint(comet.boundingBox, newBullet.positionInPoints))
+        {
+            CCLOG(@"Destroyed comet!");
+            [comet removeFromParent];
+            //TODO: Write code for achievement and powerups
+        }
+    }
     if (!gameRunning)
     {
         CGPoint bulletLocation = newBullet.positionInPoints;
@@ -115,9 +127,10 @@ static const int ENEMY_DAMAGE = 1;
 #pragma mark - Update Method
 -(void)update:(CCTime)delta
 {
+    //timer for certain events
     timer += delta;
-    //_scoreLabel.string = [NSString stringWithFormat:@"%d", enemiesKilled];
-    //_healthLabel.string = [NSString stringWithFormat:@"Health: %d", _base.health];
+    
+    //Accelerometer Data
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
     CGFloat newXPosition = _crosshair.position.x - acceleration.y * SENSITIVITY * delta;
@@ -126,8 +139,10 @@ static const int ENEMY_DAMAGE = 1;
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);
     
+    
     if (gameRunning)
     {
+        //Enemy Creation
         if ((timer >= 2) && (arc4random() % probability == 0) && ([_enemyNode.children count] < MAX_ENEMIES))
         {
             [self spawnEnemy];
@@ -138,22 +153,24 @@ static const int ENEMY_DAMAGE = 1;
 //            [_enemyNode addChild:newEnemy];
             //timer = 0;
         }
+        
+        //Remove enemies if there are too many
         else if ([_enemyNode.children count] >= MAX_ENEMIES)
         {
             CCLOG(@"Array full! Emptying array and increasing enemy frequency");
             [_enemyNode removeAllChildren];
             probability *= .5;
         }
+        
+        //Increase enemy spawn rate every ten enemies
         if (_base.score != 0 && _base.score % 10 == 0)
         {
 //            probability *= .5;
         }
     
+        //If enemy is touching base, reduce health
         for (Enemy *enemy in _enemyNode.children)
         {
-            
-            //enemySpeed *= 1.5;
-        
             if (CGRectContainsPoint(_base.boundingBox, enemy.positionInPoints))
             {
                 _base.health -= ENEMY_DAMAGE;
@@ -161,15 +178,39 @@ static const int ENEMY_DAMAGE = 1;
                 [enemy stopAllActions];
             }
         }
-    
+        
+        //if health is 0, game over
         if (_base.health <= 0)
         {
             [self gameOver];
         }
     }
     
+    //Random chance to create comet on screen
+    if (arc4random() % COMET_CHANCE == 0)
+    {
+        CCLOG(@"Comet passing!");
+        CCNode *newComet = [CCBReader load:@"Comet"];
+        [newComet setScale:.5];
+        newComet.positionInPoints = ccp(self.contentSizeInPoints.width + 50, self.contentSizeInPoints.height + 50);
+        CCAction *cometPath = [CCActionMoveTo actionWithDuration:1.5 position:ccp(-100, -100)];
+        [newComet runAction:cometPath];
+        [_cometNode addChild:newComet];
+//        CCTexture *texture = [CCTexture textureWithFile:@"ccbResources/ccbParticleMagic.png"];
+//        CCColor *color = [CCColor redColor];
+//        CCMotionStreak *cometStreak = [CCMotionStreak streakWithFade:.5 minSeg:5 width:50 color:color texture:texture];
+//        cometStreak.positionInPoints = newComet.positionInPoints;
+////        //[cometStreak runAction:cometPath];
+    }
+    for (CCNode *comet in [_cometNode.children copy])
+    {
+        if (comet.positionInPoints.x == -100 && comet.positionInPoints.y == -100)
+        {
+            [comet removeFromParent];
+        }
+    }
+    
 }
-
 #pragma mark - GameOver Method
 
 -(void)gameOver
@@ -243,8 +284,5 @@ static const int ENEMY_DAMAGE = 1;
     [_enemyNode addChild:newEnemy];
 
 }
-
-
-
 
 @end

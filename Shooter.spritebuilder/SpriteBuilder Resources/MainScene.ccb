@@ -53,7 +53,7 @@
 				<key>displayName</key>
 				<string>starBG</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_background</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
