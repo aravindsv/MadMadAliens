@@ -23,7 +23,7 @@
 -(void)update:(CCTime)delta
 {
     _scoreLabel.string = [NSString stringWithFormat:@"%d",_score];
-    if (_health == 250)
+    if (_health == 250 && _fire == nil)
     {
         CCLOG(@"Added fire particle");
         [_fire removeFromParent];
@@ -33,7 +33,7 @@
         _fire.position = ccp(.5, .5);
         [self addChild:_fire];
     }
-    if (_health == 100)
+    if (_health == 100 && _fire2 == nil)
     {
         CCLOG(@"Added fire particle");
         //[_fire removeFromParent];

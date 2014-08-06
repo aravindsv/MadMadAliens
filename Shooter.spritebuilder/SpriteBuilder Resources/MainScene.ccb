@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>19</integer>
+	<integer>21</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -43,15 +43,15 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>2</integer>
+				<integer>20</integer>
 				<key>baseClass</key>
-				<string>CCNodeGradient</string>
+				<string>CCSprite</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCNodeGradient</string>
+				<string>starBG</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -82,19 +82,6 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>1</real>
-							<real>1</real>
-							<integer>2</integer>
-							<integer>2</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>anchorPoint</string>
 						<key>type</key>
 						<string>Point</string>
@@ -111,50 +98,39 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
+							<real>1.2142542600631714</real>
+							<real>1.0808709859848022</real>
 							<false/>
 							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>startColor</string>
+						<string>spriteFrame</string>
 						<key>type</key>
-						<string>Color3</string>
+						<string>SpriteFrame</string>
 						<key>value</key>
 						<array>
-							<real>0.047482766211032867</real>
-							<real>0.14943604171276093</real>
-							<real>0.2012772262096405</real>
-							<real>1</real>
+							<string></string>
+							<string>Art/starBG.png</string>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>endColor</string>
+						<string>color</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.096171557903289795</real>
-							<real>0.39019528031349182</real>
-							<real>0.63295835256576538</real>
 							<real>1</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>vector</string>
-						<key>type</key>
-						<string>Point</string>
-						<key>value</key>
-						<array>
-							<real>0.0</real>
-							<real>-1</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -220,8 +196,8 @@
 								<string>ScaleLock</string>
 								<key>value</key>
 								<array>
-									<real>1.9199999570846558</real>
-									<real>1.1499999761581421</real>
+									<real>1</real>
+									<real>1</real>
 									<false/>
 									<integer>0</integer>
 								</array>
@@ -234,7 +210,7 @@
 								<key>value</key>
 								<array>
 									<string></string>
-									<string>Art/pixel-city@4x.png</string>
+									<string>Art/Earth-Planet@4x.png</string>
 								</array>
 							</dict>
 							<dict>
@@ -284,8 +260,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>50.010303497314453</real>
-									<real>28.755924224853516</real>
+									<real>48.010303497314453</real>
+									<real>48.755924224853516</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -530,8 +506,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -982,7 +956,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5022011399269104</real>
-							<real>0.75385558605194092</real>
+							<real>0.84448063373565674</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>

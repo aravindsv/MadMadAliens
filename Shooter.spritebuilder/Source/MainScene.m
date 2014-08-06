@@ -59,6 +59,13 @@ static const int SENSITIVITY = 5;
     newBullet.position = _crosshair.position;
     [self addChild:newBullet];
     
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
+    CCParticleSystem *_explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
+    _explosion.positionInPoints = newBullet.positionInPoints;
+    _explosion.autoRemoveOnFinish = true;
+    [self addChild:_explosion];
+    
     if (CGRectContainsPoint(_startNode.boundingBox, newBullet.positionInPoints))
     {
         CCLOG(@"Going to GameplayScene");
