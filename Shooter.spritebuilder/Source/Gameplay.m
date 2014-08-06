@@ -104,7 +104,7 @@ static const int ENEMY_DAMAGE = 1;
         CGPoint bulletLocation = newBullet.positionInPoints;
         CGPoint worldTouch = [self convertToWorldSpace:bulletLocation];
         CGPoint bulletNodeLocation = [gameOver convertToNodeSpace:worldTouch];
-        if (CGRectContainsPoint(gameOver.replayButton.boundingBox, bulletNodeLocation))
+        if (CGRectContainsPoint(gameOver.replayButton.boundingBox, bulletNodeLocation) || CGRectContainsPoint(gameOver.boundingBox, [touch locationInWorld]))
         {
             CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
             [[CCDirector sharedDirector] replaceScene:gameplay];
@@ -168,56 +168,6 @@ static const int ENEMY_DAMAGE = 1;
         }
     }
     
-}
-
-#pragma mark - Random Point Generation Methods
-
--(CGPoint)randomPositionOffScreen
-{
-    if (arc4random() % 2 == 0)
-    {
-        return ccp([self randomXFloatOffScreen], [self randomYFloatOnScreen]);
-    }
-    else
-    {
-        return ccp([self randomXFloatOnScreen], [self randomYFloatOffScreen]);
-    }
-}
-
--(float)randomXFloatOnScreen
-{
-    int size = self.contentSizeInPoints.width;
-    return arc4random() % size;
-}
-
--(float)randomXFloatOffScreen
-{
-    if (arc4random() % 2 == 0)
-    {
-        return (arc4random() % 50) * -1;
-    }
-    else
-    {
-        return (arc4random() % 50) + self.contentSizeInPoints.width;
-    }
-}
-
--(float)randomYFloatOnScreen
-{
-    int size = self.contentSizeInPoints.height;
-    return arc4random() % size;
-}
-
--(float)randomYFloatOffScreen
-{
-    if (arc4random() % 2 == 0)
-    {
-        return (arc4random() % 50) * -1;
-    }
-    else
-    {
-        return (arc4random() % 50) + self.contentSizeInPoints.height;
-    }
 }
 
 #pragma mark - GameOver Method
@@ -286,6 +236,10 @@ static const int ENEMY_DAMAGE = 1;
     newEnemy.positionInPoints = ccp(xpos, ypos);
     CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:100/enemySpeed position:_base.positionInPoints];
     [newEnemy runAction:actionMoveTo];
+    if (newEnemy.positionInPoints.x > self.contentSizeInPoints.width/2)
+    {
+        [newEnemy setScaleX:-1.f];
+    }
     [_enemyNode addChild:newEnemy];
 
 }

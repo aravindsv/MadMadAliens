@@ -22,5 +22,4 @@
     _enemySprite.spriteFrame = [CCSpriteFrame frameWithImageNamed:spriteName];
 }
 
-
 @end
