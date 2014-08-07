@@ -10,4 +10,9 @@
 
 @interface Gameplay : CCScene
 
+@property float calibX;
+@property float calibY;
+
+-(void)setCalibrationX:(float)xVal andY:(float)yVal;
+
 @end

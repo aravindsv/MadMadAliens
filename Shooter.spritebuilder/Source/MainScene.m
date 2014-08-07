@@ -9,6 +9,7 @@
 #import "MainScene.h"
 #import "Crosshair.h"
 #import "Bullet.h"
+#import "Gameplay.h"
 
 #import <CoreMotion/CoreMotion.h>
 
@@ -34,6 +35,10 @@ static const int SENSITIVITY = 5;
     if (self == [super init])
     {
         _motionManager = [[CMMotionManager alloc] init];
+        NSNumber *xCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"xCalib"];
+        NSNumber *yCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"yCalib"];
+        _calibX = [xCalib floatValue];
+        _calibY = [yCalib floatValue];
     }
     return self;
 }
@@ -69,7 +74,9 @@ static const int SENSITIVITY = 5;
     if (CGRectContainsPoint(_startNode.boundingBox, newBullet.positionInPoints))
     {
         CCLOG(@"Going to GameplayScene");
-        CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
+        CCScene *gameplay = (Gameplay *)[CCBReader loadAsScene:@"Gameplay"];
+        Gameplay *gameLevel = gameplay.children[0];
+        [gameLevel setCalibrationX:_calibX andY:_calibY];
         [[CCDirector sharedDirector] replaceScene:gameplay];
     }
 }
@@ -80,11 +87,26 @@ static const int SENSITIVITY = 5;
 {
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = _crosshair.position.x - acceleration.y * SENSITIVITY * delta;
-    CGFloat newYPosition = _crosshair.position.y + acceleration.x * SENSITIVITY * delta;
+    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y + _calibY) * SENSITIVITY * delta);
+    CGFloat newYPosition = _crosshair.position.y + ((acceleration.x - _calibX) * SENSITIVITY * delta);
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);
+}
+
+-(void)calibrate
+{
+    CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
+    CMAcceleration acceleration = accelerometerData.acceleration;
+    _calibX = acceleration.x;
+    _calibY = acceleration.y;
+    NSNumber *xCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"xCalib"];
+    NSNumber *yCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"yCalib"];
+    xCalib = [NSNumber numberWithFloat:_calibX];
+    yCalib = [NSNumber numberWithFloat:_calibY];
+    [[NSUserDefaults standardUserDefaults] setObject:xCalib forKey:@"xCalib"];
+    [[NSUserDefaults standardUserDefaults] setObject:yCalib forKey:@"yCalib"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

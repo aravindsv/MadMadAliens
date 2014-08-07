@@ -10,4 +10,7 @@
 
 @interface MainScene : CCNode
 
+@property float calibX;
+@property float calibY;
+
 @end

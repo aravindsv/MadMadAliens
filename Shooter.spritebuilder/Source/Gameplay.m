@@ -17,10 +17,11 @@
 #import <CoreMotion/CoreMotion.h>
 #import <AudioToolbox/AudioServices.h>
 
-static const int SENSITIVITY = 5;
+static const int SENSITIVITY = 8;
 static const int MAX_ENEMIES = 20;
 static const int ENEMY_DAMAGE = 1;
 static const int COMET_CHANCE = 1500;
+//static const int PLANET_CHANCE = 1000;
 
 @implementation Gameplay
 {
@@ -34,6 +35,9 @@ static const int COMET_CHANCE = 1500;
     CCLabelTTF *_healthLabel;
     
     CCNode *_cometNode;
+    CCNode *_asteroidNode;
+    CCNode *_planetNode;
+    bool shotPlanet;
     float timer;
     
     int probability;
@@ -75,6 +79,12 @@ static const int COMET_CHANCE = 1500;
     [_motionManager stopAccelerometerUpdates];
 }
 
+-(void)setCalibrationX:(float)xVal andY:(float)yVal
+{
+    _calibX = xVal;
+    _calibY = yVal;
+}
+
 #pragma mark - Touch Handling Methods
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
@@ -102,6 +112,8 @@ static const int COMET_CHANCE = 1500;
             }
         }
     }
+    
+    //Check if player hit comet
     for (CCNode *comet in [_cometNode.children copy])
     {
         if (CGRectContainsPoint(comet.boundingBox, newBullet.positionInPoints))
@@ -111,6 +123,15 @@ static const int COMET_CHANCE = 1500;
             //TODO: Write code for achievement and powerups
         }
     }
+    
+//    //Check if player hit planet
+//    for (CCNode *planet in _planetNode.children)
+//    {
+//        CCParticleSystem *fire = [CCBReader load:@"Fire"];
+//        fire.positionInPoints = ;
+//        [planet addChild:fire];
+//    }
+    
     if (!gameRunning)
     {
         CGPoint bulletLocation = newBullet.positionInPoints;
@@ -133,8 +154,8 @@ static const int COMET_CHANCE = 1500;
     //Accelerometer Data
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = _crosshair.position.x - acceleration.y * SENSITIVITY * delta;
-    CGFloat newYPosition = _crosshair.position.y + acceleration.x * SENSITIVITY * delta;
+    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y + _calibY) * SENSITIVITY * delta);
+    CGFloat newYPosition = _crosshair.position.y + ((acceleration.x - _calibX) * SENSITIVITY * delta);
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);
@@ -196,11 +217,6 @@ static const int COMET_CHANCE = 1500;
         CCAction *cometPath = [CCActionMoveTo actionWithDuration:1.5 position:ccp(-100, -100)];
         [newComet runAction:cometPath];
         [_cometNode addChild:newComet];
-//        CCTexture *texture = [CCTexture textureWithFile:@"ccbResources/ccbParticleMagic.png"];
-//        CCColor *color = [CCColor redColor];
-//        CCMotionStreak *cometStreak = [CCMotionStreak streakWithFade:.5 minSeg:5 width:50 color:color texture:texture];
-//        cometStreak.positionInPoints = newComet.positionInPoints;
-////        //[cometStreak runAction:cometPath];
     }
     for (CCNode *comet in [_cometNode.children copy])
     {
@@ -210,27 +226,35 @@ static const int COMET_CHANCE = 1500;
         }
     }
     
+//    //Random Chance for planet to pass by
+//    if (arc4random() % PLANET_CHANCE == 0)
+//    {
+//        int val = arc4random() % 2;
+//        CCNode *newPlanet;
+//        CCAction *planetPath;
+//        if (val == 0)
+//        {
+//            //Moon code
+//            newPlanet = [CCBReader load:@"Moon"];
+//            int ypos = arc4random() % ((int)self.contentSizeInPoints.height);
+//            newPlanet.positionInPoints = ccp(-50, arc4random() % ypos);
+//            planetPath = [CCActionMoveTo actionWithDuration:4 position:ccp(self.contentSizeInPoints.width + 50, ypos)];
+//        }
+//        else if (val == 1)
+//        {
+//            //Jupiter Code
+//            newPlanet = [CCBReader load:@"Jupiter"];
+//            int ypos = arc4random() % ((int)self.contentSizeInPoints.height);
+//            newPlanet.positionInPoints = ccp(self.contentSizeInPoints.width + 100, arc4random() % ypos);
+//            planetPath = [CCActionMoveTo actionWithDuration:4 position:ccp(-100, ypos)];
+//        }
+//        [newPlanet runAction:planetPath];
+//        [_planetNode addChild:newPlanet];
+//    }
+    
 }
-#pragma mark - GameOver Method
 
--(void)gameOver
-{
-    gameRunning = false;
-    NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"highscore"];
-    if (_base.score > [highScore intValue])
-    {
-        highScore = [NSNumber numberWithInt:_base.score];
-        [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"highscore"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    gameOver = (GameOver *)[CCBReader load:@"GameOver" owner:self];
-    gameOver.zOrder = 9;
-    [gameOver setScore:_base.score andHighscore:[highScore intValue]];
-    gameOver.positionType = CCPositionTypeNormalized;
-    gameOver.position = ccp(.25, 0.035);
-//    [[CCDirector sharedDirector] pushScene:(CCScene *)gameOver];
-    [self addChild:gameOver];
-}
+#pragma mark - spawnEnemy Method
 
 -(void)spawnEnemy
 {
@@ -283,6 +307,27 @@ static const int COMET_CHANCE = 1500;
     }
     [_enemyNode addChild:newEnemy];
 
+}
+
+#pragma mark - GameOver Method
+
+-(void)gameOver
+{
+    gameRunning = false;
+    NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"highscore"];
+    if (_base.score > [highScore intValue])
+    {
+        highScore = [NSNumber numberWithInt:_base.score];
+        [[NSUserDefaults standardUserDefaults] setObject:highScore forKey:@"highscore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    gameOver = (GameOver *)[CCBReader load:@"GameOver" owner:self];
+    gameOver.zOrder = 9;
+    [gameOver setScore:_base.score andHighscore:[highScore intValue]];
+    gameOver.positionType = CCPositionTypeNormalized;
+    gameOver.position = ccp(.25, 0.035);
+    //    [[CCDirector sharedDirector] pushScene:(CCScene *)gameOver];
+    [self addChild:gameOver];
 }
 
 @end
