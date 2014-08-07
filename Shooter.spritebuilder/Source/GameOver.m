@@ -7,6 +7,7 @@
 //
 
 #import "GameOver.h"
+#import "Gameplay.h"
 
 @implementation GameOver
 {
@@ -23,7 +24,11 @@
 
 -(void)replay
 {
-    CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
+    NSNumber *xCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"xCalib"];
+    NSNumber *yCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"yCalib"];
+    CCScene *gameplay = (Gameplay *)[CCBReader loadAsScene:@"Gameplay"];
+    Gameplay *gameLevel = gameplay.children[0];
+    [gameLevel setCalibrationX:[xCalib floatValue] andY:[yCalib floatValue]];
     [[CCDirector sharedDirector] replaceScene:gameplay];
 }
 

@@ -87,7 +87,7 @@ static const int SENSITIVITY = 5;
 {
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y + _calibY) * SENSITIVITY * delta);
+    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y - _calibY) * SENSITIVITY * delta);
     CGFloat newYPosition = _crosshair.position.y + ((acceleration.x - _calibX) * SENSITIVITY * delta);
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
@@ -107,6 +107,8 @@ static const int SENSITIVITY = 5;
     [[NSUserDefaults standardUserDefaults] setObject:xCalib forKey:@"xCalib"];
     [[NSUserDefaults standardUserDefaults] setObject:yCalib forKey:@"yCalib"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+//    _crosshair.positionType = CCPositionTypeNormalized;
+//    _crosshair.position = ccp(.5, .5);
 }
 
 @end

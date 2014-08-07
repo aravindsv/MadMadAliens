@@ -154,7 +154,7 @@ static const int COMET_CHANCE = 1500;
     //Accelerometer Data
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y + _calibY) * SENSITIVITY * delta);
+    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y - _calibY) * SENSITIVITY * delta);
     CGFloat newYPosition = _crosshair.position.y + ((acceleration.x - _calibX) * SENSITIVITY * delta);
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
