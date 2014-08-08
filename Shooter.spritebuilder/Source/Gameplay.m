@@ -17,7 +17,7 @@
 #import <CoreMotion/CoreMotion.h>
 #import <AudioToolbox/AudioServices.h>
 
-static const int SENSITIVITY = 6;
+static const int SENSITIVITY = 7;
 static const int ENEMY_DAMAGE = 1;
 static const int MAX_ENEMIES = 20;
 static const int COMET_CHANCE = 1500;
@@ -34,6 +34,7 @@ static const int COMET_CHANCE = 1500;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_healthLabel;
     Tutorial *tutorial;
+    CCSprite *_target;
     
     CCNode *_cometNode;
     CCNode *_asteroidNode;
@@ -68,7 +69,7 @@ static const int COMET_CHANCE = 1500;
         //Show tutorial message
         tutorialOn = true;
         gameRunning = false;
-        tutorial = (Tutorial *)[CCBReader load:@"Tutorial"];
+        tutorial = (Tutorial *)[CCBReader load:@"Tutorial" owner:self];
         [self addChild:tutorial];
     }
     else
@@ -111,18 +112,22 @@ static const int COMET_CHANCE = 1500;
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    if (tutorialOn)
-    {
-        tutorialOn = false;
-        [tutorial removeFromParent];
-        gameRunning = true;
-    }
     Bullet *newBullet = (Bullet *)[CCBReader load:@"Bullet"];
     newBullet.positionType = CCPositionTypeNormalized;
     newBullet.position = _crosshair.position;
     [self addChild:newBullet];
 
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
+    if (tutorialOn)
+    {
+        if (CGRectContainsPoint(_target.boundingBox, newBullet.positionInPoints))
+        {
+            tutorialOn = false;
+            [tutorial removeFromParent];
+            gameRunning = true;
+        }
+    }
     
     CCParticleSystem *_explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
     _explosion.positionInPoints = newBullet.positionInPoints;
