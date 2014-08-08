@@ -208,7 +208,8 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Protect the Earth by shooting the aliens!</string>
+							<string>Protect the Earth by 
+shooting the aliens!</string>
 							<false/>
 						</array>
 					</dict>
@@ -218,7 +219,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Fonts/TinyTim.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -344,6 +345,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -522,8 +525,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

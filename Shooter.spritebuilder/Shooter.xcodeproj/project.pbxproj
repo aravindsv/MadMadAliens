@@ -12,6 +12,7 @@
 		7740152F199556790082B6CA /* large_explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7740152B199556790082B6CA /* large_explosion.wav */; };
 		77401530199556790082B6CA /* small_explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7740152C199556790082B6CA /* small_explosion.wav */; };
 		77401531199556790082B6CA /* thin_laser.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7740152D199556790082B6CA /* thin_laser.wav */; };
+		7740153719956CBA0082B6CA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7740153619956CBA0082B6CA /* FacebookSDK.framework */; };
 		7788FFCB199096EB007C0630 /* Crosshair.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFCA199096EB007C0630 /* Crosshair.m */; };
 		7788FFCE19909719007C0630 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7788FFCD19909719007C0630 /* CoreMotion.framework */; };
 		7788FFD119909EB0007C0630 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFD019909EB0007C0630 /* Bullet.m */; };
@@ -74,6 +75,7 @@
 		7740152B199556790082B6CA /* large_explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = large_explosion.wav; sourceTree = "<group>"; };
 		7740152C199556790082B6CA /* small_explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = small_explosion.wav; sourceTree = "<group>"; };
 		7740152D199556790082B6CA /* thin_laser.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = thin_laser.wav; sourceTree = "<group>"; };
+		7740153619956CBA0082B6CA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		7788FFC9199096EB007C0630 /* Crosshair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Crosshair.h; path = Source/Crosshair.h; sourceTree = "<group>"; };
 		7788FFCA199096EB007C0630 /* Crosshair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Crosshair.m; path = Source/Crosshair.m; sourceTree = "<group>"; };
 		7788FFCD19909719007C0630 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -136,6 +138,7 @@
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
 				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
 				B77F1B3A17B978D7009739AE /* AVFoundation.framework in Frameworks */,
+				7740153719956CBA0082B6CA /* FacebookSDK.framework in Frameworks */,
 				B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */,
 				B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */,
 				B77F1B4017B978D7009739AE /* CoreGraphics.framework in Frameworks */,
@@ -231,6 +234,7 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7740153619956CBA0082B6CA /* FacebookSDK.framework */,
 				7788FFCD19909719007C0630 /* CoreMotion.framework */,
 				8392007918EE8E3300B6C429 /* GLKit.framework */,
 				B7B3713D180358F1007369CC /* libObjectiveChipmunk.a */,
@@ -486,6 +490,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
@@ -519,6 +527,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				HEADER_SEARCH_PATHS = (

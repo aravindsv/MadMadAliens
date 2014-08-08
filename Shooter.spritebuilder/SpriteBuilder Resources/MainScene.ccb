@@ -231,7 +231,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>48.010303497314453</real>
+									<real>50.010303497314453</real>
 									<real>48.755924224853516</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -279,7 +279,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>Helvetica</string>
+								<string>Fonts/TinyTim.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -288,7 +288,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>36</real>
+									<real>25</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -619,7 +619,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Fonts/TinyTim.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -912,7 +912,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Fonts/TinyTim.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1577,7 +1577,7 @@
 									<integer>8</integer>
 									<key>value</key>
 									<array>
-										<real>0.0</real>
+										<real>20</real>
 										<real>0.0</real>
 									</array>
 								</dict>
@@ -1641,7 +1641,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>0.57042253017425537</real>
 							<real>0.85000002384185791</real>
 							<integer>0</integer>
 							<integer>2</integer>
@@ -1684,7 +1684,7 @@
 						<string>FloatXY</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>20</real>
 							<real>0.0</real>
 						</array>
 					</dict>
@@ -1705,7 +1705,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Fonts/TinyTim.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1989,7 +1989,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>0.46666666865348816</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
@@ -2025,7 +2025,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.66666668653488159</real>
+			<real>0.83333331346511841</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
