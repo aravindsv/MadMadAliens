@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7740152919953FDB0082B6CA /* Tutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7740152819953FDB0082B6CA /* Tutorial.m */; };
 		7788FFCB199096EB007C0630 /* Crosshair.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFCA199096EB007C0630 /* Crosshair.m */; };
 		7788FFCE19909719007C0630 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7788FFCD19909719007C0630 /* CoreMotion.framework */; };
 		7788FFD119909EB0007C0630 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFD019909EB0007C0630 /* Bullet.m */; };
@@ -63,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7740152719953FDB0082B6CA /* Tutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tutorial.h; path = Source/Tutorial.h; sourceTree = "<group>"; };
+		7740152819953FDB0082B6CA /* Tutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tutorial.m; path = Source/Tutorial.m; sourceTree = "<group>"; };
 		7788FFC9199096EB007C0630 /* Crosshair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Crosshair.h; path = Source/Crosshair.h; sourceTree = "<group>"; };
 		7788FFCA199096EB007C0630 /* Crosshair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Crosshair.m; path = Source/Crosshair.m; sourceTree = "<group>"; };
 		7788FFCD19909719007C0630 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -152,6 +155,8 @@
 				B7378993180767190076A88C /* MainScene.m */,
 				7788FFE91990BCD8007C0630 /* Gameplay.h */,
 				7788FFEA1990BCD8007C0630 /* Gameplay.m */,
+				7740152719953FDB0082B6CA /* Tutorial.h */,
+				7740152819953FDB0082B6CA /* Tutorial.m */,
 				7788FFF319915101007C0630 /* Base.h */,
 				7788FFF419915101007C0630 /* Base.m */,
 				7788FFF01990BD18007C0630 /* GameOver.h */,
@@ -379,6 +384,7 @@
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				7788FFF21990BD18007C0630 /* GameOver.m in Sources */,
 				7788FFF519915101007C0630 /* Base.m in Sources */,
+				7740152919953FDB0082B6CA /* Tutorial.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				7788FFEF1990BD04007C0630 /* Enemy.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,

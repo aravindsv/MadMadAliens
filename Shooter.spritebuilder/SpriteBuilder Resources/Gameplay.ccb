@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>27</integer>
+	<integer>28</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -100,8 +100,6 @@
 						<string>StarryBG.ccb</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -753,7 +751,7 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>6.0176506042480469</real>
+			<real>5.8676414489746094</real>
 			<key>position</key>
 			<real>2.9666666984558105</real>
 			<key>resolution</key>

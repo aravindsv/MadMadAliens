@@ -13,6 +13,7 @@
 {
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_highscoreLabel;
+    CCLabelTTF *_gameOverLabel;
     
     int score;
     int highScore;
@@ -24,11 +25,8 @@
 
 -(void)replay
 {
-    NSNumber *xCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"xCalib"];
-    NSNumber *yCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"yCalib"];
+    
     CCScene *gameplay = (Gameplay *)[CCBReader loadAsScene:@"Gameplay"];
-    Gameplay *gameLevel = gameplay.children[0];
-    [gameLevel setCalibrationX:[xCalib floatValue] andY:[yCalib floatValue]];
     [[CCDirector sharedDirector] replaceScene:gameplay];
 }
 

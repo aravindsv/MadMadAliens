@@ -8,6 +8,8 @@
 
 #import "CCScene.h"
 
+@class Base;
+
 @interface Gameplay : CCScene
 
 @property float calibX;

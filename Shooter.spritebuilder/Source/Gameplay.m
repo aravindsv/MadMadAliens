@@ -12,14 +12,14 @@
 #import "Enemy.h"
 #import "GameOver.h"
 #import "Base.h"
-#import "CCMotionStreak.h"
+#import "Tutorial.h"
 
 #import <CoreMotion/CoreMotion.h>
 #import <AudioToolbox/AudioServices.h>
 
-static const int SENSITIVITY = 8;
-static const int MAX_ENEMIES = 20;
+static const int SENSITIVITY = 6;
 static const int ENEMY_DAMAGE = 1;
+static const int MAX_ENEMIES = 20;
 static const int COMET_CHANCE = 1500;
 //static const int PLANET_CHANCE = 1000;
 
@@ -33,6 +33,7 @@ static const int COMET_CHANCE = 1500;
     CCNode *_replayButton;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_healthLabel;
+    Tutorial *tutorial;
     
     CCNode *_cometNode;
     CCNode *_asteroidNode;
@@ -42,8 +43,10 @@ static const int COMET_CHANCE = 1500;
     
     int probability;
     float enemySpeed;
+    int maxEnemies;
     
     bool gameRunning;
+    bool tutorialOn;
     GameOver *gameOver;
 }
 
@@ -55,7 +58,26 @@ static const int COMET_CHANCE = 1500;
     _base.health = 500;
     probability = 60;
     enemySpeed = 50.f;
+    maxEnemies = 1;
     gameRunning = true;
+    NSNumber *timesPlayed = [[NSUserDefaults standardUserDefaults] valueForKey:@"timesPlayed"];
+    timesPlayed = [NSNumber numberWithInt:[timesPlayed intValue]+1];
+    [[NSUserDefaults standardUserDefaults] setObject:timesPlayed forKey:@"timesPlayed"];
+    if ([timesPlayed intValue] >= 1)
+    {
+        //Show tutorial message
+        tutorialOn = true;
+        gameRunning = false;
+        tutorial = (Tutorial *)[CCBReader load:@"Tutorial"];
+        [self addChild:tutorial];
+    }
+    else
+    {
+        tutorialOn = false;
+    }
+    NSNumber *xCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"xCalib"];
+    NSNumber *yCalib = [[NSUserDefaults standardUserDefaults] objectForKey:@"yCalib"];
+    [self setCalibrationX:[xCalib floatValue] andY:[yCalib floatValue]];
 }
 
 -(id)init
@@ -89,6 +111,12 @@ static const int COMET_CHANCE = 1500;
 
 -(void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    if (tutorialOn)
+    {
+        tutorialOn = false;
+        [tutorial removeFromParent];
+        gameRunning = true;
+    }
     Bullet *newBullet = (Bullet *)[CCBReader load:@"Bullet"];
     newBullet.positionType = CCPositionTypeNormalized;
     newBullet.position = _crosshair.position;
@@ -109,6 +137,7 @@ static const int COMET_CHANCE = 1500;
             if (gameRunning)
             {
                 _base.score++;
+                maxEnemies++;
             }
         }
     }
@@ -164,23 +193,17 @@ static const int COMET_CHANCE = 1500;
     if (gameRunning)
     {
         //Enemy Creation
-        if ((timer >= 2) && (arc4random() % probability == 0) && ([_enemyNode.children count] < MAX_ENEMIES))
+        if ((timer >= 2) && (arc4random() % probability == 0) && ([_enemyNode.children count] < maxEnemies))
         {
             [self spawnEnemy];
-//            Enemy *newEnemy = (Enemy *)[CCBReader load:@"Enemy"];
-//            newEnemy.positionInPoints = [self randomPositionOffScreen];
-//            CCActionMoveTo *actionMoveTo = [CCActionMoveTo actionWithDuration:100/enemySpeed position:_base.positionInPoints];
-//            [newEnemy runAction:actionMoveTo];
-//            [_enemyNode addChild:newEnemy];
-            //timer = 0;
         }
         
         //Remove enemies if there are too many
         else if ([_enemyNode.children count] >= MAX_ENEMIES)
         {
             CCLOG(@"Array full! Emptying array and increasing enemy frequency");
-            [_enemyNode removeAllChildren];
-            probability *= .5;
+            //[_enemyNode removeAllChildren];
+//            probability *= .5;
         }
         
         //Increase enemy spawn rate every ten enemies

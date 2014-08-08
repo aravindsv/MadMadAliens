@@ -10,4 +10,6 @@
 
 @interface Enemy : CCNode
 
+@property int rand;
+
 @end

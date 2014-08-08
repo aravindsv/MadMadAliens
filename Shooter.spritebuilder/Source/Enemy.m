@@ -17,8 +17,8 @@
 -(void)didLoadFromCCB
 {
     self.zOrder = 10;
-    int rand = arc4random() % 7;
-    NSString *spriteName = [NSString stringWithFormat:@"Art/ghost%d.png", rand];
+    _rand = arc4random() % 7;
+    NSString *spriteName = [NSString stringWithFormat:@"Art/ghost%d.png", _rand];
     _enemySprite.spriteFrame = [CCSpriteFrame frameWithImageNamed:spriteName];
 }
 
