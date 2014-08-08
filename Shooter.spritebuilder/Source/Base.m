@@ -43,16 +43,16 @@
         _fire2.position = ccp(.5, .75);
         [self addChild:_fire2];
     }
-    if (_health == 1)
-    {
-        CCLOG(@"Added LARGE fire particle");
-        [_fire removeFromParent];
-        [_fire2 removeFromParent];
-        _fire = (CCParticleSystem *)[CCBReader load:@"LargeFire"];
-        _fire.positionType = CCPositionTypeNormalized;
-        _fire.position = ccp(.5, .5);
-        [self addChild:_fire];
-    }
+//    if (_health == 1)
+//    {
+//        CCLOG(@"Added LARGE fire particle");
+//        [_fire removeFromParent];
+//        [_fire2 removeFromParent];
+//        _fire = (CCParticleSystem *)[CCBReader load:@"LargeFire"];
+//        _fire.positionType = CCPositionTypeNormalized;
+//        _fire.position = ccp(.5, .5);
+//        [self addChild:_fire];
+//    }
 }
 
 @end

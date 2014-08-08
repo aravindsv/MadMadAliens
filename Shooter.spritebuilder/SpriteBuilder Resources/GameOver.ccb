@@ -125,7 +125,7 @@
 							<real>0.056839372962713242</real>
 							<real>0.17888280749320984</real>
 							<real>0.2409394383430481</real>
-							<real>0.40000000596046448</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -134,11 +134,9 @@
 						<key>type</key>
 						<string>Float</string>
 						<key>value</key>
-						<real>0.40000000596046448</real>
+						<real>0.0</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -229,6 +227,70 @@
 							<key>type</key>
 							<integer>3</integer>
 						</dict>
+						<key>skew</key>
+						<dict>
+							<key>keyframes</key>
+							<array>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>0.5</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>0.0</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>0.66666668653488159</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>20</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>0.83333331346511841</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>0.0</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+							</array>
+							<key>name</key>
+							<string>skew</string>
+							<key>type</key>
+							<integer>8</integer>
+						</dict>
 					</dict>
 				</dict>
 				<key>baseClass</key>
@@ -265,7 +327,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>-0.36666661500930786</real>
 							<real>0.81666678190231323</real>
 							<integer>0</integer>
 							<integer>2</integer>
@@ -294,6 +356,22 @@
 							<real>1</real>
 							<false/>
 							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>baseValue</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+						<key>name</key>
+						<string>skew</string>
+						<key>type</key>
+						<string>FloatXY</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -333,6 +411,19 @@
 						<string>Check</string>
 						<key>value</key>
 						<false/>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>color</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<real>0.88638120889663696</real>
+							<real>0.89791172742843628</real>
+							<real>0.90518021583557129</real>
+							<real>1</real>
+						</array>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -571,6 +662,70 @@
 							<key>type</key>
 							<integer>3</integer>
 						</dict>
+						<key>skew</key>
+						<dict>
+							<key>keyframes</key>
+							<array>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>1</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>0.0</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>1.1666666269302368</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>-20</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>1.3333333730697632</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>0.0</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+							</array>
+							<key>name</key>
+							<string>skew</string>
+							<key>type</key>
+							<integer>8</integer>
+						</dict>
 					</dict>
 				</dict>
 				<key>baseClass</key>
@@ -639,6 +794,22 @@
 						</array>
 					</dict>
 					<dict>
+						<key>baseValue</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+						<key>name</key>
+						<string>skew</string>
+						<key>type</key>
+						<string>FloatXY</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+					</dict>
+					<dict>
 						<key>name</key>
 						<string>string</string>
 						<key>type</key>
@@ -684,7 +855,20 @@
 						<key>type</key>
 						<string>Float</string>
 						<key>value</key>
-						<real>1</real>
+						<real>0.0</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>color</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<real>0.88084185123443604</real>
+							<real>0.89154887199401855</real>
+							<real>0.87757223844528198</real>
+							<real>0.0</real>
+						</array>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -923,6 +1107,70 @@
 							<key>type</key>
 							<integer>3</integer>
 						</dict>
+						<key>skew</key>
+						<dict>
+							<key>keyframes</key>
+							<array>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>1.5</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>0.0</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>1.6666666269302368</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>20</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>1</integer>
+									</dict>
+									<key>name</key>
+									<string>skew</string>
+									<key>time</key>
+									<real>1.8333333730697632</real>
+									<key>type</key>
+									<integer>8</integer>
+									<key>value</key>
+									<array>
+										<real>0.0</real>
+										<real>0.0</real>
+									</array>
+								</dict>
+							</array>
+							<key>name</key>
+							<string>skew</string>
+							<key>type</key>
+							<integer>8</integer>
+						</dict>
 					</dict>
 				</dict>
 				<key>baseClass</key>
@@ -991,6 +1239,22 @@
 						</array>
 					</dict>
 					<dict>
+						<key>baseValue</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+						<key>name</key>
+						<string>skew</string>
+						<key>type</key>
+						<string>FloatXY</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+					</dict>
+					<dict>
 						<key>name</key>
 						<string>string</string>
 						<key>type</key>
@@ -1045,9 +1309,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.87322568893432617</real>
+							<real>0.88268005847930908</real>
+							<real>0.89190548658370972</real>
 							<real>0.0</real>
 						</array>
 					</dict>
@@ -1449,6 +1713,19 @@
 							</dict>
 							<dict>
 								<key>name</key>
+								<string>color</string>
+								<key>type</key>
+								<string>Color3</string>
+								<key>value</key>
+								<array>
+									<real>0.88603031635284424</real>
+									<real>0.91007518768310547</real>
+									<real>0.88494998216629028</real>
+									<real>1</real>
+								</array>
+							</dict>
+							<dict>
+								<key>name</key>
 								<string>dimensions</string>
 								<key>type</key>
 								<string>Size</string>
@@ -1626,6 +1903,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -1755,7 +2034,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.5</real>
+			<real>0.0</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

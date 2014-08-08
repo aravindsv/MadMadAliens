@@ -18,7 +18,7 @@
 #import <AudioToolbox/AudioServices.h>
 
 static const int SENSITIVITY = 7;
-static const int ENEMY_DAMAGE = 1;
+static const float ENEMY_DAMAGE = 1;
 static const int MAX_ENEMIES = 20;
 static const int COMET_CHANCE = 1500;
 //static const int PLANET_CHANCE = 1000;
@@ -118,6 +118,7 @@ static const int COMET_CHANCE = 1500;
     [self addChild:newBullet];
 
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [[OALSimpleAudio sharedInstance] playEffect:@"thin_laser.wav"];
     
     if (tutorialOn)
     {
@@ -126,6 +127,7 @@ static const int COMET_CHANCE = 1500;
             tutorialOn = false;
             [tutorial removeFromParent];
             gameRunning = true;
+            [[OALSimpleAudio sharedInstance] playEffect:@"small_explosion.wav"];
         }
     }
     
@@ -139,12 +141,20 @@ static const int COMET_CHANCE = 1500;
         if (CGRectContainsPoint(enemy.boundingBox, newBullet.positionInPoints))
         {
             [enemy removeFromParent];
+            [[OALSimpleAudio sharedInstance] playEffect:@"small_explosion.wav"];
             if (gameRunning)
             {
                 _base.score++;
                 maxEnemies++;
             }
         }
+    }
+    
+    if (gameRunning && CGRectContainsPoint(_base.boundingBox, newBullet.positionInPoints))
+    {
+        [[OALSimpleAudio sharedInstance] playEffect:@"small_explosion.wav"];
+        _base.health -= 10;
+        _base.healthBar.scaleX -= .02;
     }
     
     //Check if player hit comet
@@ -231,6 +241,7 @@ static const int COMET_CHANCE = 1500;
         //if health is 0, game over
         if (_base.health <= 0)
         {
+            [[OALSimpleAudio sharedInstance] playEffect:@"large_explosion.wav"];
             [self gameOver];
         }
     }
@@ -342,6 +353,12 @@ static const int COMET_CHANCE = 1500;
 -(void)gameOver
 {
     gameRunning = false;
+    [_enemyNode removeAllChildren];
+    CCParticleSystem *explode = (CCParticleSystem *)[CCBReader load:@"LargeFire"];
+    explode.positionInPoints = _base.positionInPoints;
+    explode.autoRemoveOnFinish = true;
+    [self addChild:explode];
+    [_base removeFromParent];
     NSNumber *highScore = [[NSUserDefaults standardUserDefaults] objectForKey:@"highscore"];
     if (_base.score > [highScore intValue])
     {

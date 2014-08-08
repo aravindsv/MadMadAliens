@@ -28,6 +28,7 @@ static const int SENSITIVITY = 5;
 -(void)didLoadFromCCB
 {
     self.userInteractionEnabled = true;
+    [self.animationManager runAnimationsForSequenceNamed:@"Opening"];
 }
 
 -(id)init
@@ -46,7 +47,7 @@ static const int SENSITIVITY = 5;
 -(void)onEnter
 {
     [super onEnter];
-    [_motionManager startAccelerometerUpdates];
+    [_motionManager performSelector:@selector(startAccelerometerUpdates) withObject:nil afterDelay:.1f];
 }
 
 -(void)onExit
@@ -65,6 +66,7 @@ static const int SENSITIVITY = 5;
     [self addChild:newBullet];
     
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [[OALSimpleAudio sharedInstance] playEffect:@"thin_laser.wav"];
     
     CCParticleSystem *_explosion = (CCParticleSystem *)[CCBReader load:@"Explosion"];
     _explosion.positionInPoints = newBullet.positionInPoints;

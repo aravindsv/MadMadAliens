@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7740152919953FDB0082B6CA /* Tutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 7740152819953FDB0082B6CA /* Tutorial.m */; };
+		7740152E199556790082B6CA /* dimmed_small_explosion.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 7740152A199556790082B6CA /* dimmed_small_explosion.aiff */; };
+		7740152F199556790082B6CA /* large_explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7740152B199556790082B6CA /* large_explosion.wav */; };
+		77401530199556790082B6CA /* small_explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7740152C199556790082B6CA /* small_explosion.wav */; };
+		77401531199556790082B6CA /* thin_laser.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7740152D199556790082B6CA /* thin_laser.wav */; };
 		7788FFCB199096EB007C0630 /* Crosshair.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFCA199096EB007C0630 /* Crosshair.m */; };
 		7788FFCE19909719007C0630 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7788FFCD19909719007C0630 /* CoreMotion.framework */; };
 		7788FFD119909EB0007C0630 /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFD019909EB0007C0630 /* Bullet.m */; };
@@ -66,6 +70,10 @@
 /* Begin PBXFileReference section */
 		7740152719953FDB0082B6CA /* Tutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tutorial.h; path = Source/Tutorial.h; sourceTree = "<group>"; };
 		7740152819953FDB0082B6CA /* Tutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tutorial.m; path = Source/Tutorial.m; sourceTree = "<group>"; };
+		7740152A199556790082B6CA /* dimmed_small_explosion.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = dimmed_small_explosion.aiff; sourceTree = "<group>"; };
+		7740152B199556790082B6CA /* large_explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = large_explosion.wav; sourceTree = "<group>"; };
+		7740152C199556790082B6CA /* small_explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = small_explosion.wav; sourceTree = "<group>"; };
+		7740152D199556790082B6CA /* thin_laser.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = thin_laser.wav; sourceTree = "<group>"; };
 		7788FFC9199096EB007C0630 /* Crosshair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Crosshair.h; path = Source/Crosshair.h; sourceTree = "<group>"; };
 		7788FFCA199096EB007C0630 /* Crosshair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Crosshair.m; path = Source/Crosshair.m; sourceTree = "<group>"; };
 		7788FFCD19909719007C0630 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -242,6 +250,10 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7740152A199556790082B6CA /* dimmed_small_explosion.aiff */,
+				7740152B199556790082B6CA /* large_explosion.wav */,
+				7740152C199556790082B6CA /* small_explosion.wav */,
+				7740152D199556790082B6CA /* thin_laser.wav */,
 				B73789911807667A0076A88C /* Icons */,
 				B737893A180761570076A88C /* Published-iOS */,
 			);
@@ -344,12 +356,16 @@
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
+				7740152E199556790082B6CA /* dimmed_small_explosion.aiff in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
+				77401530199556790082B6CA /* small_explosion.wav in Resources */,
+				77401531199556790082B6CA /* thin_laser.wav in Resources */,
+				7740152F199556790082B6CA /* large_explosion.wav in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 			);
