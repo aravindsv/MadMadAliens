@@ -20,6 +20,9 @@
 		7788FFEF1990BD04007C0630 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFEE1990BD04007C0630 /* Enemy.m */; };
 		7788FFF21990BD18007C0630 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFF11990BD18007C0630 /* GameOver.m */; };
 		7788FFF519915101007C0630 /* Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 7788FFF419915101007C0630 /* Base.m */; };
+		77F03C761995907C001F78C7 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F03C751995907C001F78C7 /* Twitter.framework */; };
+		77F03C7819959141001F78C7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F03C7719959141001F78C7 /* Social.framework */; };
+		77F03C7A1995918F001F78C7 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F03C791995918F001F78C7 /* Accounts.framework */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
 		B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5908188484E7003F4D28 /* iPad-old@2x.png */; };
@@ -89,6 +92,9 @@
 		7788FFF11990BD18007C0630 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameOver.m; path = Source/GameOver.m; sourceTree = "<group>"; };
 		7788FFF319915101007C0630 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base.h; path = Source/Base.h; sourceTree = "<group>"; };
 		7788FFF419915101007C0630 /* Base.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base.m; path = Source/Base.m; sourceTree = "<group>"; };
+		77F03C751995907C001F78C7 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		77F03C7719959141001F78C7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		77F03C791995918F001F78C7 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
@@ -112,7 +118,7 @@
 		B73789861807631A0076A88C /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Source/Prefix.pch; sourceTree = SOURCE_ROOT; };
 		B7378992180767190076A88C /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = Source/MainScene.h; sourceTree = "<group>"; };
 		B7378993180767190076A88C /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainScene.m; path = Source/MainScene.m; sourceTree = "<group>"; };
-		B77F1B2E17B978D7009739AE /* Shooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shooter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B77F1B2E17B978D7009739AE /* Mad Mad Aliens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mad Mad Aliens.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77F1B3117B978D7009739AE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B77F1B3317B978D7009739AE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B77F1B3517B978D7009739AE /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -130,10 +136,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
+				77F03C7A1995918F001F78C7 /* Accounts.framework in Frameworks */,
+				77F03C7819959141001F78C7 /* Social.framework in Frameworks */,
+				77F03C761995907C001F78C7 /* Twitter.framework in Frameworks */,
 				7788FFCE19909719007C0630 /* CoreMotion.framework in Frameworks */,
 				8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */,
 				B737898A1807642B0076A88C /* libcocos2d.a in Frameworks */,
-				B77F1B3217B978D7009739AE /* QuartzCore.framework in Frameworks */,
 				B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */,
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
 				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
@@ -226,7 +235,7 @@
 		B77F1B2F17B978D7009739AE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B77F1B2E17B978D7009739AE /* Shooter.app */,
+				B77F1B2E17B978D7009739AE /* Mad Mad Aliens.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -234,6 +243,9 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				77F03C791995918F001F78C7 /* Accounts.framework */,
+				77F03C7719959141001F78C7 /* Social.framework */,
+				77F03C751995907C001F78C7 /* Twitter.framework */,
 				7740153619956CBA0082B6CA /* FacebookSDK.framework */,
 				7788FFCD19909719007C0630 /* CoreMotion.framework */,
 				8392007918EE8E3300B6C429 /* GLKit.framework */,
@@ -293,7 +305,7 @@
 			);
 			name = Shooter;
 			productName = Example;
-			productReference = B77F1B2E17B978D7009739AE /* Shooter.app */;
+			productReference = B77F1B2E17B978D7009739AE /* Mad Mad Aliens.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -513,7 +525,7 @@
 					"-lsqlite3",
 					"-ObjC",
 				);
-				PRODUCT_NAME = Shooter;
+				PRODUCT_NAME = "Mad Mad Aliens";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -548,7 +560,7 @@
 					"-lsqlite3",
 					"-ObjC",
 				);
-				PRODUCT_NAME = Shooter;
+				PRODUCT_NAME = "Mad Mad Aliens";
 				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

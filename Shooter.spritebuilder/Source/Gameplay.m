@@ -371,7 +371,6 @@ static const int COMET_CHANCE = 1500;
     [gameOver setScore:_base.score andHighscore:[highScore intValue]];
     gameOver.positionType = CCPositionTypeNormalized;
     gameOver.position = ccp(.25, 0.035);
-    //    [[CCDirector sharedDirector] pushScene:(CCScene *)gameOver];
     [self addChild:gameOver];
 }
 
