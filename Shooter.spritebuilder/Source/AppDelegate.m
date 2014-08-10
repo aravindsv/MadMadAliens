@@ -58,6 +58,11 @@
     
     [self setupCocos2dWithOptions:cocos2dSetup];
     
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification) {
+        application.applicationIconBadgeNumber = 0;
+    }
+    
     return YES;
 }
 
@@ -81,6 +86,13 @@
 {
     [[GCHelper sharedInstance] authenticateLocalUser];
     return [CCBReader loadAsScene:@"MainScene"];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    
+    CCLOG(@"Notification could not be displayed because App is active");
+    application.applicationIconBadgeNumber = 0;
 }
 
 @end

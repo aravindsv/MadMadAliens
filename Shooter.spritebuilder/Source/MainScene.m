@@ -37,6 +37,20 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     _sensitivity = [sensit intValue];
+    
+    //Send push notification in 24 hours
+    [self sendNotification];
+}
+
+- (IBAction)sendNotification
+{
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:86400];
+    localNotification.alertBody = @"Mad Mad Aliens are attacking! Defend the Earth!";
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.applicationIconBadgeNumber = 0;//[[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 -(id)init
@@ -84,6 +98,7 @@
     if (CGRectContainsPoint(_startNode.boundingBox, newBullet.positionInPoints))
     {
         CCLOG(@"Going to GameplayScene");
+        
         CCScene *gameplay = (Gameplay *)[CCBReader loadAsScene:@"Gameplay"];
         Gameplay *gameLevel = gameplay.children[0];
         [gameLevel setCalibrationX:_calibX andY:_calibY];
