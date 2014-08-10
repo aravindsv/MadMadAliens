@@ -29,6 +29,7 @@
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
+#import "GCHelper.h"
 
 @implementation AppController
 
@@ -56,8 +57,6 @@
     
     
     [self setupCocos2dWithOptions:cocos2dSetup];
-
-    [[CCDirector sharedDirector] setDisplayStats:YES];
     
     return YES;
 }
@@ -80,6 +79,7 @@
 
 - (CCScene*) startScene
 {
+    [[GCHelper sharedInstance] authenticateLocalUser];
     return [CCBReader loadAsScene:@"MainScene"];
 }
 

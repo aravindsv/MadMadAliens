@@ -12,6 +12,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/Twitter.h>
 #import <Social/Social.h>
+#import <GameKit/GameKit.h>
+#import "GCHelper.h"
 
 @implementation GameOver
 {
@@ -33,11 +35,17 @@
     [[CCDirector sharedDirector] replaceScene:gameplay];
 }
 
+-(void)mainMenu
+{
+    CCScene *mainMenu = [CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector] replaceScene:mainMenu];
+}
+
 -(void)setScore:(int)curScore andHighscore:(int)curHighscore
 {
     score = curScore;
     highScore = curHighscore;
-    
+    [[GCHelper defaultHelper] reportScore:score forLeaderboardID:@"aliens_leaderboard"];
     _scoreLabel.string = [NSString stringWithFormat:@"Score: %d", score];
     _highscoreLabel.string = [NSString stringWithFormat:@"High Score: %d", highScore];
 }
@@ -132,10 +140,29 @@
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Not logged in!" message:@"You must be logged in to Twitter to post!" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-        // optional - add more buttons:
-        //[alert addButtonWithTitle:@"Yes"];
         [alert show];
     }
+}
+
+-(void)displayLeaderboard
+{
+    [self showLeaderboard:@"aliens_leaderboard"];
+}
+
+- (void)showLeaderboard: (NSString*) leaderboardID{
+    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    if (gameCenterController != nil)
+    {
+        gameCenterController.gameCenterDelegate = self;
+        gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gameCenterController.leaderboardTimeScope = GKLeaderboardTimeScopeToday;
+        gameCenterController.leaderboardCategory = leaderboardID;
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController: gameCenterController animated: YES completion:nil];
+    }
+}
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
+    [[UIApplication sharedApplication].keyWindow.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

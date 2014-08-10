@@ -13,7 +13,7 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-static const int SENSITIVITY = 5;
+//static const int SENSITIVITY = 5;
 
 @implementation MainScene
 {
@@ -29,6 +29,14 @@ static const int SENSITIVITY = 5;
 {
     self.userInteractionEnabled = true;
     [self.animationManager runAnimationsForSequenceNamed:@"Opening"];
+    NSNumber *sensit = [[NSUserDefaults standardUserDefaults] valueForKey:@"sensit"];
+    if ([sensit intValue] == 0)
+    {
+        sensit = [NSNumber numberWithInt:7];
+        [[NSUserDefaults standardUserDefaults] setObject:sensit forKey:@"sensit"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    _sensitivity = [sensit intValue];
 }
 
 -(id)init
@@ -89,8 +97,8 @@ static const int SENSITIVITY = 5;
 {
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y - _calibY) * SENSITIVITY * delta);
-    CGFloat newYPosition = _crosshair.position.y + ((acceleration.x - _calibX) * SENSITIVITY * delta);
+    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y - _calibY) * _sensitivity * delta);
+    CGFloat newYPosition = _crosshair.position.y + ((acceleration.x - _calibX) * _sensitivity * delta);
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);

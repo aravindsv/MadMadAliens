@@ -12,5 +12,6 @@
 
 @property float calibX;
 @property float calibY;
+@property int sensitivity;
 
 @end

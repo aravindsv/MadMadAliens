@@ -14,6 +14,7 @@
 
 @property float calibX;
 @property float calibY;
+@property int sensitivity;
 
 -(void)setCalibrationX:(float)xVal andY:(float)yVal;
 

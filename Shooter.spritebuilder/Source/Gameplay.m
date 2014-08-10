@@ -13,14 +13,16 @@
 #import "GameOver.h"
 #import "Base.h"
 #import "Tutorial.h"
+#import "GCHelper.h"
 
 #import <CoreMotion/CoreMotion.h>
 #import <AudioToolbox/AudioServices.h>
 
-static const int SENSITIVITY = 7;
+//static const int SENSITIVITY = 7;
 static const float ENEMY_DAMAGE = 1;
 static const int MAX_ENEMIES = 20;
 static const int COMET_CHANCE = 1500;
+static const int INITIAL_HEALTH = 500;
 //static const int PLANET_CHANCE = 1000;
 
 @implementation Gameplay
@@ -31,6 +33,7 @@ static const int COMET_CHANCE = 1500;
     Crosshair *_crosshair;
     Base *_base;
     CCNode *_replayButton;
+    CCNode *_mainScreenButton;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_healthLabel;
     Tutorial *tutorial;
@@ -56,15 +59,17 @@ static const int COMET_CHANCE = 1500;
 -(void)didLoadFromCCB
 {
     self.userInteractionEnabled = true;
-    _base.health = 500;
+    _base.health = INITIAL_HEALTH;
     probability = 60;
     enemySpeed = 50.f;
     maxEnemies = 1;
+    NSNumber *sensit = [[NSUserDefaults standardUserDefaults] valueForKey:@"sensit"];
+    _sensitivity = [sensit intValue];
     gameRunning = true;
     NSNumber *timesPlayed = [[NSUserDefaults standardUserDefaults] valueForKey:@"timesPlayed"];
     timesPlayed = [NSNumber numberWithInt:[timesPlayed intValue]+1];
     [[NSUserDefaults standardUserDefaults] setObject:timesPlayed forKey:@"timesPlayed"];
-    if ([timesPlayed intValue] >= 1)
+    if ([timesPlayed intValue] == 1)
     {
         //Show tutorial message
         tutorialOn = true;
@@ -145,6 +150,35 @@ static const int COMET_CHANCE = 1500;
             if (gameRunning)
             {
                 _base.score++;
+                if (_base.score == 1)
+                {
+                    [[GCHelper defaultHelper] reportAchievementIdentifier:@"first_alien_killed" percentComplete:100.0];
+                }
+                else if (_base.score == 25)
+                {
+                    [[GCHelper defaultHelper] reportAchievementIdentifier:@"25_aliens_killed" percentComplete:100.0];
+                }
+                else if (_base.score == 50)
+                {
+                    [[GCHelper defaultHelper] reportAchievementIdentifier:@"50_aliens_killed" percentComplete:100.0];
+                }
+                else if (_base.score == 100)
+                {
+                    [[GCHelper defaultHelper] reportAchievementIdentifier:@"100_aliens_killed" percentComplete:100.0];
+                }
+                
+                if (_base.score == 10 && _base.health == INITIAL_HEALTH)
+                {
+                    [[GCHelper defaultHelper] reportAchievementIdentifier:@"didnt_hurt_earth" percentComplete:100.0];
+                }
+                else if (_base.score == 20 && _base.health == INITIAL_HEALTH)
+                {
+                    [[GCHelper defaultHelper] reportAchievementIdentifier:@"didnt_destroy_earth" percentComplete:100.0];
+                }
+                else if (_base.score == 50 && _base.health == INITIAL_HEALTH)
+                {
+                    [[GCHelper defaultHelper] reportAchievementIdentifier:@"saved_earth" percentComplete:100.0];
+                }
                 maxEnemies++;
             }
         }
@@ -155,6 +189,10 @@ static const int COMET_CHANCE = 1500;
         [[OALSimpleAudio sharedInstance] playEffect:@"small_explosion.wav"];
         _base.health -= 10;
         _base.healthBar.scaleX -= .02;
+        if (_base.health == 0)
+        {
+            [[GCHelper defaultHelper] reportAchievementIdentifier:@"destroyed_earth" percentComplete:100.0];
+        }
     }
     
     //Check if player hit comet
@@ -164,6 +202,7 @@ static const int COMET_CHANCE = 1500;
         {
             CCLOG(@"Destroyed comet!");
             [comet removeFromParent];
+            [[GCHelper defaultHelper] reportAchievementIdentifier:@"shot_comet" percentComplete:100.0];
             //TODO: Write code for achievement and powerups
         }
     }
@@ -181,11 +220,16 @@ static const int COMET_CHANCE = 1500;
         CGPoint bulletLocation = newBullet.positionInPoints;
         CGPoint worldTouch = [self convertToWorldSpace:bulletLocation];
         CGPoint bulletNodeLocation = [gameOver convertToNodeSpace:worldTouch];
-        if (CGRectContainsPoint(gameOver.replayButton.boundingBox, bulletNodeLocation) || CGRectContainsPoint(gameOver.boundingBox, [touch locationInWorld]))
-        {
-            CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
-            [[CCDirector sharedDirector] replaceScene:gameplay];
-        }
+//        if (CGRectContainsPoint(_replayButton.boundingBox, bulletNodeLocation) || CGRectContainsPoint(_replayButton.boundingBox, [touch locationInWorld]))
+//        {
+//            CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
+//            [[CCDirector sharedDirector] replaceScene:gameplay];
+//        }
+//        if (CGRectContainsPoint(gameOver.mainScreenButton.boundingBox, [touch locationInWorld]))
+//        {
+//            CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+//            [[CCDirector sharedDirector] replaceScene:mainScene];
+//        }
     }
 }
 
@@ -198,8 +242,8 @@ static const int COMET_CHANCE = 1500;
     //Accelerometer Data
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
-    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y - _calibY) * SENSITIVITY * delta);
-    CGFloat newYPosition = _crosshair.position.y + ((acceleration.x - _calibX) * SENSITIVITY * delta);
+    CGFloat newXPosition = _crosshair.position.x - ((acceleration.y - _calibY) * _sensitivity * delta);
+    CGFloat newYPosition = _crosshair.position.y + ((acceleration.x - _calibX) * _sensitivity * delta);
     newXPosition = clampf(newXPosition, 0, self.contentSize.width);
     newYPosition = clampf(newYPosition, 0, self.contentSize.height);
     _crosshair.position = CGPointMake(newXPosition, newYPosition);
@@ -370,7 +414,7 @@ static const int COMET_CHANCE = 1500;
     gameOver.zOrder = 9;
     [gameOver setScore:_base.score andHighscore:[highScore intValue]];
     gameOver.positionType = CCPositionTypeNormalized;
-    gameOver.position = ccp(.25, 0.035);
+    gameOver.position = ccp(.5, 0.5);
     [self addChild:gameOver];
 }
 

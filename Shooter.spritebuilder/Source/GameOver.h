@@ -13,6 +13,7 @@
 -(void)setScore:(int)curScore andHighscore:(int)curHighscore;
 
 @property (strong) CCNode *replayButton;
+@property (strong) CCNode *mainScreenButton;
 
 -(void)replay;
 
