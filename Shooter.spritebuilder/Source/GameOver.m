@@ -15,6 +15,8 @@
 #import <GameKit/GameKit.h>
 #import "GCHelper.h"
 
+//TODO: Integrate Ads
+
 @implementation GameOver
 {
     CCLabelTTF *_scoreLabel;
@@ -53,7 +55,6 @@
 -(void)shareToFacebook
 {
     FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
-//    params.link = [NSURL URLWithString:@"https://developers.facebook.com/docs/ios/share/"];
     params.link = [NSURL URLWithString:@""];
     
     // If the Facebook app is installed and we can present the share dialog
@@ -133,7 +134,6 @@
         [tweetSheet setInitialText:[NSString stringWithFormat:@"I just saved the Earth from %d aliens in #MadMadAliens!", score]];
         UIImage *twitPic = [UIImage imageWithContentsOfFile:@"Art/ghost3.png"];
         [tweetSheet addImage:twitPic];
-//        [[CCDirector sharedDirector] presentModalViewController:tweetSheet animated:YES];
         UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
         [rootViewController presentViewController:tweetSheet animated:YES completion:nil];
     }

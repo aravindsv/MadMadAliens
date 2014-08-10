@@ -8,6 +8,8 @@
 
 #import "Enemy.h"
 
+//TODO: vary enemy motion
+
 @implementation Enemy
 {
     CCSprite *_enemySprite;

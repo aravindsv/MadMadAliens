@@ -15,6 +15,8 @@
 
 //static const int SENSITIVITY = 5;
 
+//TODO: create Sensitivity Slider
+
 @implementation MainScene
 {
     CMMotionManager *_motionManager;
@@ -132,8 +134,8 @@
     [[NSUserDefaults standardUserDefaults] setObject:xCalib forKey:@"xCalib"];
     [[NSUserDefaults standardUserDefaults] setObject:yCalib forKey:@"yCalib"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-//    _crosshair.positionType = CCPositionTypeNormalized;
-//    _crosshair.position = ccp(.5, .5);
+    _crosshair.positionType = CCPositionTypeNormalized;
+    _crosshair.position = ccp(.5, .5);
 }
 
 @end

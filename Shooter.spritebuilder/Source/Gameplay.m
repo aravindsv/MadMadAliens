@@ -18,12 +18,10 @@
 #import <CoreMotion/CoreMotion.h>
 #import <AudioToolbox/AudioServices.h>
 
-//static const int SENSITIVITY = 7;
 static const float ENEMY_DAMAGE = 1;
 static const int MAX_ENEMIES = 20;
 static const int COMET_CHANCE = 1500;
 static const int INITIAL_HEALTH = 500;
-//static const int PLANET_CHANCE = 1000;
 
 @implementation Gameplay
 {
@@ -51,6 +49,8 @@ static const int INITIAL_HEALTH = 500;
     
     bool gameRunning;
     bool tutorialOn;
+    bool shieldOn;
+    float shieldTimer;
     GameOver *gameOver;
 }
 
@@ -61,7 +61,7 @@ static const int INITIAL_HEALTH = 500;
     self.userInteractionEnabled = true;
     _base.health = INITIAL_HEALTH;
     probability = 60;
-    enemySpeed = 50.f;
+    enemySpeed = 25.f;
     maxEnemies = 1;
     NSNumber *sensit = [[NSUserDefaults standardUserDefaults] valueForKey:@"sensit"];
     _sensitivity = [sensit intValue];
@@ -146,9 +146,22 @@ static const int INITIAL_HEALTH = 500;
         if (CGRectContainsPoint(enemy.boundingBox, newBullet.positionInPoints))
         {
             [enemy removeFromParent];
+            enemySpeed += .5;
             [[OALSimpleAudio sharedInstance] playEffect:@"small_explosion.wav"];
             if (gameRunning)
             {
+                if (arc4random() % 20 == 0)
+                {
+                    _base.health += 100;
+                    _base.healthBar.scaleX += .2;
+                    [_base.animationManager runAnimationsForSequenceNamed:@"Health"];
+                }
+                else if (arc4random() % 50 == 0)
+                {
+                    [_base.animationManager runAnimationsForSequenceNamed:@"Shield"];
+                    shieldTimer = 0;
+                    shieldOn = true;
+                }
                 _base.score++;
                 if (_base.score == 1)
                 {
@@ -184,7 +197,7 @@ static const int INITIAL_HEALTH = 500;
         }
     }
     
-    if (gameRunning && CGRectContainsPoint(_base.boundingBox, newBullet.positionInPoints))
+    if (gameRunning && CGRectContainsPoint(_base.boundingBox, newBullet.positionInPoints) && !shieldOn)
     {
         [[OALSimpleAudio sharedInstance] playEffect:@"small_explosion.wav"];
         _base.health -= 10;
@@ -203,33 +216,16 @@ static const int INITIAL_HEALTH = 500;
             CCLOG(@"Destroyed comet!");
             [comet removeFromParent];
             [[GCHelper defaultHelper] reportAchievementIdentifier:@"shot_comet" percentComplete:100.0];
-            //TODO: Write code for achievement and powerups
+            //TODO: Write code for powerups
         }
     }
     
-//    //Check if player hit planet
-//    for (CCNode *planet in _planetNode.children)
-//    {
-//        CCParticleSystem *fire = [CCBReader load:@"Fire"];
-//        fire.positionInPoints = ;
-//        [planet addChild:fire];
-//    }
     
     if (!gameRunning)
     {
         CGPoint bulletLocation = newBullet.positionInPoints;
         CGPoint worldTouch = [self convertToWorldSpace:bulletLocation];
         CGPoint bulletNodeLocation = [gameOver convertToNodeSpace:worldTouch];
-//        if (CGRectContainsPoint(_replayButton.boundingBox, bulletNodeLocation) || CGRectContainsPoint(_replayButton.boundingBox, [touch locationInWorld]))
-//        {
-//            CCScene *gameplay = [CCBReader loadAsScene:@"Gameplay"];
-//            [[CCDirector sharedDirector] replaceScene:gameplay];
-//        }
-//        if (CGRectContainsPoint(gameOver.mainScreenButton.boundingBox, [touch locationInWorld]))
-//        {
-//            CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-//            [[CCDirector sharedDirector] replaceScene:mainScene];
-//        }
     }
 }
 
@@ -238,7 +234,15 @@ static const int INITIAL_HEALTH = 500;
 {
     //timer for certain events
     timer += delta;
-    
+    if (shieldOn)
+    {
+        shieldTimer += delta;
+        if (shieldTimer >= 5)
+        {
+            CCLOG(@"Shield Expired");
+            shieldOn = false;
+        }
+    }
     //Accelerometer Data
     CMAccelerometerData *accelerometerData = _motionManager.accelerometerData;
     CMAcceleration acceleration = accelerometerData.acceleration;
@@ -252,7 +256,7 @@ static const int INITIAL_HEALTH = 500;
     if (gameRunning)
     {
         //Enemy Creation
-        if ((timer >= 2) && (arc4random() % probability == 0) && ([_enemyNode.children count] < maxEnemies))
+        if ((timer >= 1) && (arc4random() % probability == 0) && ([_enemyNode.children count] < maxEnemies))
         {
             [self spawnEnemy];
         }
@@ -276,8 +280,11 @@ static const int INITIAL_HEALTH = 500;
         {
             if (CGRectContainsPoint(_base.boundingBox, enemy.positionInPoints))
             {
-                _base.health -= ENEMY_DAMAGE;
-                _base.healthBar.scaleX -= .002;
+                if (!shieldOn)
+                {
+                    _base.health -= ENEMY_DAMAGE;
+                    _base.healthBar.scaleX -= .002;
+                }
                 [enemy stopAllActions];
             }
         }
