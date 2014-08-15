@@ -13,7 +13,7 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-//static const int SENSITIVITY = 5;
+static const int SENSITIVITY = 5;
 
 //TODO: create Sensitivity Slider
 
