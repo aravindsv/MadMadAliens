@@ -152,8 +152,17 @@ static const int INITIAL_HEALTH = 500;
             {
                 if (arc4random() % 20 == 0)
                 {
+                    
                     _base.health += 100;
                     _base.healthBar.scaleX += .2;
+                    if (_base.health > INITIAL_HEALTH)
+                    {
+                        _base.health = INITIAL_HEALTH;
+                    }
+                    if (_base.healthBar.scaleX > 1)
+                    {
+                        _base.healthBar.scaleX = 1;
+                    }
                     [_base.animationManager runAnimationsForSequenceNamed:@"Health"];
                 }
                 else if (arc4random() % 50 == 0)
@@ -240,6 +249,7 @@ static const int INITIAL_HEALTH = 500;
         if (shieldTimer >= 5)
         {
             CCLOG(@"Shield Expired");
+            [_base.animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
             shieldOn = false;
         }
     }

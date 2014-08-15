@@ -519,8 +519,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Aravind Vadali (AQ6F2VZP2L)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Aravind Vadali (AQ6F2VZP2L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aravind Vadali (P4PRT35NW9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -546,7 +546,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Mad Mad Aliens";
-				PROVISIONING_PROFILE = "8A6B75E1-1C4C-4051-B6BF-97337D62DE7F";
+				PROVISIONING_PROFILE = "EEFB9669-8C05-4B26-B7AA-6BF445C2924F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -558,7 +558,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Aravind Vadali (AQ6F2VZP2L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Aravind Vadali (P4PRT35NW9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Aravind Vadali (AQ6F2VZP2L)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -583,7 +583,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Mad Mad Aliens";
-				PROVISIONING_PROFILE = "8A6B75E1-1C4C-4051-B6BF-97337D62DE7F";
+				PROVISIONING_PROFILE = "EEFB9669-8C05-4B26-B7AA-6BF445C2924F";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
