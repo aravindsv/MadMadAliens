@@ -122,7 +122,6 @@ static const int INITIAL_HEALTH = 500;
     newBullet.position = _crosshair.position;
     [self addChild:newBullet];
 
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [[OALSimpleAudio sharedInstance] playEffect:@"thin_laser.wav"];
     
     if (tutorialOn)
@@ -413,6 +412,7 @@ static const int INITIAL_HEALTH = 500;
 
 -(void)gameOver
 {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     gameRunning = false;
     [_enemyNode removeAllChildren];
     CCParticleSystem *explode = (CCParticleSystem *)[CCBReader load:@"LargeFire"];

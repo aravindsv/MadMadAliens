@@ -13,7 +13,7 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-static const int SENSITIVITY = 5;
+static const int SENSITIVITY = 4;
 
 //TODO: create Sensitivity Slider
 
@@ -34,11 +34,12 @@ static const int SENSITIVITY = 5;
     NSNumber *sensit = [[NSUserDefaults standardUserDefaults] valueForKey:@"sensit"];
     if ([sensit intValue] == 0)
     {
-        sensit = [NSNumber numberWithInt:7];
+        sensit = [NSNumber numberWithInt:SENSITIVITY];
         [[NSUserDefaults standardUserDefaults] setObject:sensit forKey:@"sensit"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    _sensitivity = [sensit intValue];
+//    _sensitivity = [sensit intValue];
+    _sensitivity = SENSITIVITY;
     
     //Send push notification in 24 hours
     [self sendNotification];
@@ -46,6 +47,11 @@ static const int SENSITIVITY = 5;
 
 - (IBAction)sendNotification
 {
+    //First remove any previously scedhuled notifications
+    NSMutableArray* scheduledLocalNotifications = [[UIApplication sharedApplication].scheduledLocalNotifications mutableCopy];
+    [scheduledLocalNotifications removeAllObjects];
+    [UIApplication sharedApplication].scheduledLocalNotifications = [NSArray arrayWithArray:scheduledLocalNotifications];
+    
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:86400];
     localNotification.alertBody = @"Mad Mad Aliens are attacking! Defend the Earth!";

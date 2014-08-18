@@ -165,4 +165,30 @@
     [[UIApplication sharedApplication].keyWindow.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+-(void)nothing
+{
+    int res = arc4random() % 3;
+    switch (res) {
+        case 0:
+        {
+            [self.animationManager runAnimationsForSequenceNamed:@""];
+            break;
+        }
+        case 1:
+        {
+            [self.animationManager runAnimationsForSequenceNamed:@""];
+            break;
+        }
+        case 2:
+        {
+            [self.animationManager runAnimationsForSequenceNamed:@""];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
 @end
