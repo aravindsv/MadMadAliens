@@ -547,7 +547,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Mad Mad Aliens";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8A6B75E1-1C4C-4051-B6BF-97337D62DE7F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -584,7 +584,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Mad Mad Aliens";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8A6B75E1-1C4C-4051-B6BF-97337D62DE7F";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
